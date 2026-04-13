@@ -920,9 +920,7 @@
 <script>
 // ── Build email to avoid spam protection ──────────
 (function() {
-  var u = 'ventas.gaitapolo';
-  var d = 'gmail.com';
-  var e = u + '@' + d;
+  var e = atob('dmVudGFzLmdhaXRhcG9sb0BnbWFpbC5jb20=');
   var el = document.getElementById('emailLabel');
   var pill = document.getElementById('emailPill');
   if (el) el.textContent = e;
