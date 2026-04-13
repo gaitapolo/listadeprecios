@@ -238,6 +238,9 @@
     border-bottom: 2px solid transparent;
     margin-bottom: -2px;
     transition: all 0.18s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 44px;
   }
   .tab-btn:hover { color: var(--dark); }
   .tab-btn.active-horse { color: var(--green); border-bottom-color: var(--green); }
@@ -268,6 +271,12 @@
     padding: 14px 20px;
     cursor: pointer;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-family: inherit;
   }
   .section-hd:hover { filter: brightness(0.95); }
 
@@ -493,7 +502,7 @@
 
     <!-- 01 Accesorios generales -->
     <div class="section horse open" id="s01">
-      <div class="section-hd" onclick="toggleSec('s01')">
+      <button class="section-hd" onclick="toggleSec('s01')" type="button">
         <div class="section-left">
           <span class="sec-num">01</span>
           <span class="sec-name">Accesorios Generales</span>
@@ -523,7 +532,7 @@
 
     <!-- 02 Bozales -->
     <div class="section horse" id="s02">
-      <div class="section-hd" onclick="toggleSec('s02')">
+      <button class="section-hd" onclick="toggleSec('s02')" type="button">
         <div class="section-left">
           <span class="sec-num">02</span>
           <span class="sec-name">Bozales y Cabrestros</span>
@@ -551,7 +560,7 @@
 
     <!-- 03 Cabezadas -->
     <div class="section horse" id="s03">
-      <div class="section-hd" onclick="toggleSec('s03')">
+      <button class="section-hd" onclick="toggleSec('s03')" type="button">
         <div class="section-left">
           <span class="sec-num">03</span>
           <span class="sec-name">Cabezadas y Partes</span>
@@ -590,7 +599,7 @@
 
     <!-- 04 Cinchas y Sobrecinchas -->
     <div class="section horse" id="s04">
-      <div class="section-hd" onclick="toggleSec('s04')">
+      <button class="section-hd" onclick="toggleSec('s04')" type="button">
         <div class="section-left">
           <span class="sec-num">04</span>
           <span class="sec-name">Cinchas y Sobrecinchas</span>
@@ -621,7 +630,7 @@
 
     <!-- 05 Estribos y Estriberas -->
     <div class="section horse" id="s05">
-      <div class="section-hd" onclick="toggleSec('s05')">
+      <button class="section-hd" onclick="toggleSec('s05')" type="button">
         <div class="section-left">
           <span class="sec-num">05</span>
           <span class="sec-name">Estribos y Estriberas</span>
@@ -645,7 +654,7 @@
 
     <!-- 06 Matras y Bajomonturas -->
     <div class="section horse" id="s06">
-      <div class="section-hd" onclick="toggleSec('s06')">
+      <button class="section-hd" onclick="toggleSec('s06')" type="button">
         <div class="section-left">
           <span class="sec-num">06</span>
           <span class="sec-name">Matras, Cojinillos y Bajomonturas</span>
@@ -670,7 +679,7 @@
 
     <!-- 07 Monturas -->
     <div class="section horse" id="s07">
-      <div class="section-hd" onclick="toggleSec('s07')">
+      <button class="section-hd" onclick="toggleSec('s07')" type="button">
         <div class="section-left">
           <span class="sec-num">07</span>
           <span class="sec-name">Monturas</span>
@@ -691,7 +700,7 @@
 
     <!-- 08 Protección Caballo -->
     <div class="section horse" id="s08">
-      <div class="section-hd" onclick="toggleSec('s08')">
+      <button class="section-hd" onclick="toggleSec('s08')" type="button">
         <div class="section-left">
           <span class="sec-num">08</span>
           <span class="sec-name">Protección</span>
@@ -725,7 +734,7 @@
 
     <!-- 09 Anteojos -->
     <div class="section player open" id="s09">
-      <div class="section-hd" onclick="toggleSec('s09')">
+      <button class="section-hd" onclick="toggleSec('s09')" type="button">
         <div class="section-left">
           <span class="sec-num">09</span>
           <span class="sec-name">Anteojos</span>
@@ -747,7 +756,7 @@
 
     <!-- 10 Bochas y Bocheros -->
     <div class="section player" id="s10">
-      <div class="section-hd" onclick="toggleSec('s10')">
+      <button class="section-hd" onclick="toggleSec('s10')" type="button">
         <div class="section-left">
           <span class="sec-num">10</span>
           <span class="sec-name">Bochas y Bocheros</span>
@@ -774,7 +783,7 @@
 
     <!-- 11 Bolsos -->
     <div class="section player" id="s11">
-      <div class="section-hd" onclick="toggleSec('s11')">
+      <button class="section-hd" onclick="toggleSec('s11')" type="button">
         <div class="section-left">
           <span class="sec-num">11</span>
           <span class="sec-name">Bolsos</span>
@@ -796,7 +805,7 @@
 
     <!-- 12 Botas -->
     <div class="section player" id="s12">
-      <div class="section-hd" onclick="toggleSec('s12')">
+      <button class="section-hd" onclick="toggleSec('s12')" type="button">
         <div class="section-left">
           <span class="sec-num">12</span>
           <span class="sec-name">Botas</span>
@@ -821,7 +830,7 @@
 
     <!-- 13 Cascos -->
     <div class="section player" id="s13">
-      <div class="section-hd" onclick="toggleSec('s13')">
+      <button class="section-hd" onclick="toggleSec('s13')" type="button">
         <div class="section-left">
           <span class="sec-num">13</span>
           <span class="sec-name">Cascos</span>
@@ -849,7 +858,7 @@
 
     <!-- 14 Fustas -->
     <div class="section player" id="s14">
-      <div class="section-hd" onclick="toggleSec('s14')">
+      <button class="section-hd" onclick="toggleSec('s14')" type="button">
         <div class="section-left">
           <span class="sec-num">14</span>
           <span class="sec-name">Fustas</span>
@@ -870,7 +879,7 @@
 
     <!-- 15 Indumentaria y Accesorios -->
     <div class="section player" id="s15">
-      <div class="section-hd" onclick="toggleSec('s15')">
+      <button class="section-hd" onclick="toggleSec('s15')" type="button">
         <div class="section-left">
           <span class="sec-num">15</span>
           <span class="sec-name">Indumentaria y Accesorios</span>
@@ -892,7 +901,7 @@
 
     <!-- 16 Protección Jugador -->
     <div class="section player" id="s16">
-      <div class="section-hd" onclick="toggleSec('s16')">
+      <button class="section-hd" onclick="toggleSec('s16')" type="button">
         <div class="section-left">
           <span class="sec-num">16</span>
           <span class="sec-name">Protección</span>
