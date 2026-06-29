@@ -280,7 +280,10 @@
   .section-left {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px 12px;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 0;
   }
 
   .sec-num {
@@ -297,6 +300,8 @@
     text-transform: uppercase;
     letter-spacing: 0.07em;
     color: var(--white);
+    flex: 1 1 auto;
+    min-width: 110px;
   }
 
   .sec-count {
@@ -306,6 +311,8 @@
     background: rgba(255,255,255,0.12);
     border-radius: 20px;
     padding: 1px 9px;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .chevron {
@@ -586,9 +593,9 @@
             <tr data-search="frentera diamante cabezada gaita polo"><td><div class="pname">Frentera diamante</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">14</span></td></tr>
             <tr data-search="montantes par cabezada gaita polo"><td><div class="pname">Montantes</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">14</span></td></tr>
             <tr data-search="hociquera plana cabezada gaita polo"><td><div class="pname">Hociquera plana</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">23</span></td></tr>
-            <tr data-search="hociquera redonda trenzada cuero crudo cabezada gaita polo"><td><div class="pname">Hociquera redonda</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">40</span></td></tr>
-            <tr data-search="hociquera patria fina trenzada cuero crudo cabezada gaita polo"><td><div class="pname">Hociquera patria fina</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">63</span></td></tr>
-            <tr data-search="hociquera patria ancha trenzada cuero crudo cabezada gaita polo"><td><div class="pname">Hociquera patria ancha</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">99</span></td></tr>
+            <tr data-search="hociquera redonda trenzada cuero crudo cabezada gaita polo"><td><div class="pname">Hociquera redonda</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">35</span></td></tr>
+            <tr data-search="hociquera patria fina trenzada cuero crudo cabezada gaita polo"><td><div class="pname">Hociquera patria fina</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">55</span></td></tr>
+            <tr data-search="hociquera patria ancha trenzada cuero crudo cabezada gaita polo"><td><div class="pname">Hociquera patria ancha</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">85</span></td></tr>
             <tr data-search="pretal sin plantilla cabezada gaita polo"><td><div class="pname">Pretal sin plantilla</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">33</span></td></tr>
             <tr data-search="pretal con plantilla cabezada gaita polo"><td><div class="pname">Pretal con plantilla</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">39</span></td></tr>
             <tr data-search="rienda cocida cabezada gaita polo"><td><div class="pname">Rienda cocida</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">23</span></td></tr>
