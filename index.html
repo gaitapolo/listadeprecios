@@ -340,6 +340,19 @@ a.idle-t{display:block;margin:0;padding:0;text-decoration:none;white-space:nowra
 .empty{align-self:flex-end;font-family:'Poppins',sans-serif;font-size:11px;background:none;border:0;color:var(--mid-gray);text-decoration:underline;cursor:pointer;padding:0;margin-top:-4px;}
 .panel.s2 .empty{display:none;}
 .loading{padding:40px 0;text-align:center;color:var(--mid-gray);font-size:13px;}
+@media (max-width:640px){
+  .prow{grid-template-columns:72px 1fr auto;grid-template-rows:auto auto;column-gap:12px;row-gap:6px;align-items:center;}
+  .prow .thumb{grid-row:1 / span 2;align-self:start;}
+  .prow .pmeta{grid-column:2 / -1;grid-row:1;}
+  .prow .price-cell{grid-column:2;grid-row:2;text-align:left;}
+  .prow .ctl{grid-column:3;grid-row:2;justify-self:end;display:flex;align-items:center;gap:8px;}
+  .prow .add{width:auto;padding:6px 12px;border-radius:999px;font-size:11.5px;}
+  .prow .qty{width:104px;}
+  .prow .incart{font-size:10.5px;white-space:nowrap;}
+}
+
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px;}
+.vopt{justify-content:center;text-align:center;}
 </style>
 </head>
 <body>
@@ -450,7 +463,19 @@ const full=d=>d.n+(d.b?' ('+d.b+')':'');
 const needsSogas=d=>d.o==='levantador-sogas';
 const isLev=d=>/^levantador/.test(d.o||'');
 const isPel=d=>/^pelham/.test(d.o||'');
-const hasOpts=d=>isLev(d)||isPel(d);
+const VCACHE={};
+function vars(d){if(d.id in VCACHE)return VCACHE[d.id];let r=null;
+  const m=/(?:^|[.,]\s*)disponibles?\s+en\s+(talles?|colou?r(?:es)?)?\s*([^.]+)/i.exec(d.d||'');
+  if(m){let items=m[2].trim().split(/\s*,\s*|\s+y\s+/).map(x=>x.trim()).filter(Boolean);
+    let kind=m[1]?(/^col/i.test(m[1])?'color':'talle'):'medida',unit='';
+    const um=/^(.*?)\s*(cm|mm|lts?)$/i.exec(items[items.length-1]||'');
+    if(um&&!m[1]){unit=' '+um[2];items[items.length-1]=um[1];}
+    if(kind==='color')items=items.map(x=>x.charAt(0).toUpperCase()+x.slice(1));
+    if(items.length>1)r={kind,items:items.map(x=>x+unit),rest:(d.d.slice(0,m.index)+d.d.slice(m.index+m[0].length)).replace(/^[\s.,]+|[\s.,]+$/g,'')};}
+  return VCACHE[d.id]=r;}
+const VLBL={talle:'Talle',medida:'Medida',color:'Color'};
+const shownDetail=d=>{const v=vars(d);return v?v.rest:d.d;};
+const hasOpts=d=>isLev(d)||isPel(d)||!!vars(d);
 const baseId=k=>k.split('|')[0];
 const opts=k=>{const o={};k.split('|').slice(1).forEach(p=>{const i=p.indexOf(':');o[p.slice(0,i)]=p.slice(i+1);});return o;};
 const mkKey=(id,o)=>[id].concat(Object.entries(o).filter(([,v])=>v).map(([a,v])=>a+':'+v)).join('|');
@@ -466,7 +491,7 @@ function thumb(d){return d.f?`<button type="button" class="thumb" data-zoom="${d
 function price(d){return `<div class="price-cell"><span class="price-cur">USD</span><span class="price-val">${esc(d.p)}</span></div>`;}
 function item(d){
   const sel=countFor(d.id)>0;
-  const meta=`<div class="pname">${esc(d.n)}</div>${d.d?`<div class="pdetail">${esc(d.d)}${needsSogas(d)?' · se pueden sumar':''}</div>`:''}${d.b?`<span class="pbrand">${esc(d.b)}</span>`:''}`;
+  const meta=`<div class="pname">${esc(d.n)}</div>${shownDetail(d)?`<div class="pdetail">${esc(shownDetail(d))}${needsSogas(d)?' · se pueden sumar':''}</div>`:''}${d.b?`<span class="pbrand">${esc(d.b)}</span>`:''}`;
   if(view==='grid')return `<article class="pcard${sel?' sel':''}" id="i-${d.id}">${thumb(d)}<div class="pbody"><div class="pmeta">${meta}</div><div class="pfoot">${price(d)}<div class="ctl">${ctrl(d)}</div></div></div></article>`;
   return `<article class="prow${sel?' sel':''}" id="i-${d.id}">${thumb(d)}<div class="pmeta">${meta}</div>${price(d)}<div class="ctl">${ctrl(d)}</div></article>`;
 }
@@ -493,7 +518,8 @@ function renderSearch(){
 }
 function render(){renderTabs();renderSearch();}
 function totals(){let q=0,t=0;Object.entries(cart).forEach(([k,v])=>{q+=v;t+=v*unitPrice(k);});return{q,t};}
-function extras(k){const o=opts(k),x=[];
+function extras(k){const o=opts(k),x=[];const V=vars(BY[baseId(k)]);
+  if(o.v&&V)x.push('- '+V.kind+' '+o.v);
   if(o.s==='none')x.push('sin sogas');
   if(o.s==='eco')x.push('+ sogas económicas (USD 25)');
   if(o.s==='prem')x.push('+ sogas premium (USD 65 en lugar de USD 70)');
@@ -502,7 +528,7 @@ function extras(k){const o=opts(k),x=[];
   if(o.b==='prem')x.push('con barbada premium (+USD 35 en lugar de USD 40)');
   return x;}
 function lineLabel(k){const d=BY[baseId(k)],x=extras(k);
-  return full(d)+(x.length?' '+x.join(' '):(d.d?' - '+d.d:''));}
+  const rd=shownDetail(d);return full(d)+(x.length?' '+x.join(' '):(rd?' - '+rd:''));}
 let ORDER=null;
 function orderId(){if(!ORDER){ORDER='GP-'+String(Math.floor(10000+Math.random()*90000));}return ORDER;}
 function payVal(){const r=document.querySelector('input[name="pago"]:checked');return r?r.value:'';}
@@ -524,10 +550,10 @@ function refreshCart(){
   document.getElementById('cbCount').textContent=q+(q===1?' producto':' productos');
   document.getElementById('cbTotal').textContent=usd(t);
   document.getElementById('pTotal').textContent=usd(t);
-  document.getElementById('pList').innerHTML=q?Object.entries(cart).map(([k,v])=>{const d=BY[baseId(k)],o=opts(k),xs=[];
+  document.getElementById('pList').innerHTML=q?Object.entries(cart).map(([k,v])=>{const d=BY[baseId(k)],o=opts(k),xs=[];const V=vars(d);if(o.v&&V)xs.push(VLBL[V.kind]+' '+esc(o.v));
     if(o.s==='prem')xs.push('Sogas premium USD 65 <s>USD 70</s>');if(o.s==='eco')xs.push('Sogas económicas USD 25');if(o.s==='none')xs.push('Sin sogas');
     if(o.p)xs.push('Pata '+esc(o.p));if(o.d)xs.push('Discos '+esc(o.d)+' USD 5');if(o.b==='prem')xs.push('Barbada premium +USD 35 <s>USD 40</s>');
-    const vv=xs.length;const sub=vv?xs.join(' · '):esc([d.d,d.b].filter(Boolean).join(' · '));
+    const vv=xs.length;const sub=vv?xs.join(' · '):esc([shownDetail(d),d.b].filter(Boolean).join(' · '));
     return `<div class="p-item">${d.f?`<img class="ph" src="fotos/${encodeURI(d.f)}" alt="">`:'<img class="ph none" src="fotos/logo-negro.png" alt="">'}<div class="t">${esc(d.n)}<small>${sub}${vv&&d.b?' · '+esc(d.b):''}</small><div class="qty sm"><button type="button" data-a="dec" data-k="${k}" aria-label="Quitar uno">−</button><span>${v}</span><button type="button" data-a="inc" data-k="${k}" aria-label="Sumar uno">+</button></div></div><div class="r">${usd(unitPrice(k)*v)}<button type="button" data-a="del" data-k="${k}">Quitar</button></div></div>`;}).join('')
     :'<p class="p-note">Todavía no agregaste productos.</p>';
   document.getElementById('send').href=`https://wa.me/${WA}?text=${encodeURIComponent(message())}`;
@@ -540,10 +566,11 @@ function closeP(){panel.classList.remove('show');if(!sog.classList.contains('sho
 function openZ(id){const d=BY[id];const im=document.getElementById('zoomImg');im.src='fotos/'+encodeURI(d.f);im.alt=d.n;document.getElementById('zoomCap').textContent=full(d)+' · USD '+d.p;zoom.classList.add('show');document.getElementById('closeZoom').focus();}
 function closeZ(){zoom.classList.remove('show');}
 let cur=null;
-function openS(id){const d=BY[id];cur={id,s:needsSogas(d)?'none':'',d:'',dc:'',b:isPel(d)?'std':'',p:isPel(d)&&onlyLarga(d)?'larga':''};
-  document.getElementById('sogTitle').textContent=isPel(d)?'Elegí la barbada':'Armá tu levantador';
+function openS(id){const d=BY[id];cur={id,v:'',s:needsSogas(d)?'none':'',d:'',dc:'',b:isPel(d)?'std':'',p:isPel(d)&&onlyLarga(d)?'larga':''};const V=vars(d);
+  document.getElementById('sogTitle').textContent=isPel(d)?'Elegí la barbada':isLev(d)?'Armá tu levantador':'Elegí '+(V.kind==='medida'?'la medida':'el '+V.kind);
   document.getElementById('sogName').textContent=full(d)+' · '+usd(d.p);
   let h='';
+  if(V){h+=`<div class="og"><div class="ot">${VLBL[V.kind]}</div><div class="vgrid">${V.items.map(x=>`<button type="button" class="opt vopt" data-o="v" data-val="${esc(x)}"><span class="ol">${esc(x)}</span></button>`).join('')}</div>${V.rest?`<p class="onote">${esc(V.rest)}</p>`:''}</div>`;}
   if(needsSogas(d)){h+=`<div class="og"><div class="ot">Sogas</div>
    <button type="button" class="opt" data-o="s" data-val="none"><span class="ol">Sin sogas</span><span class="op">+ USD 0</span></button>
    <button type="button" class="opt" data-o="s" data-val="eco"><span class="ol">Sogas económicas</span><span class="op">+ USD 25</span></button>
@@ -570,9 +597,9 @@ function syncOpt(){if(!cur)return;const d=BY[cur.id];
   cur.d=on&&on.checked?(cur.dc||'?'):'';
   const t=Number(d.p)+(cur.s?SOG[cur.s].add:0)+(cur.d?DISC_PRICE:0)+(cur.b==='prem'?BARB_ADD:0);
   document.getElementById('optTotal').textContent=usd(t);
-  const btn=document.getElementById('optAdd');const needP=isPel(d)&&!cur.p,bad=cur.d==='?'||needP;btn.disabled=bad;
-  btn.lastChild.textContent=needP?'Elegí pata larga o corta':cur.d==='?'?'Elegí el color de los discos':'Agregar a la consulta';}
-function confirmOpt(){if(!cur||cur.d==='?'||(isPel(BY[cur.id])&&!cur.p))return;const o={s:cur.s,p:cur.p,d:cur.d,b:cur.b==='prem'?'prem':''};const k=mkKey(cur.id,o);cart[k]=(cart[k]||0)+1;const id=cur.id;closeS();updItem(id);}
+  const btn=document.getElementById('optAdd');const V=vars(d),needV=V&&!cur.v,needP=isPel(d)&&!cur.p,bad=cur.d==='?'||needP||needV;btn.disabled=bad;
+  btn.lastChild.textContent=needV?'Elegí '+(V.kind==='medida'?'la medida':'el '+V.kind):needP?'Elegí pata larga o corta':cur.d==='?'?'Elegí el color de los discos':'Agregar a la consulta';}
+function confirmOpt(){if(!cur||cur.d==='?'||(isPel(BY[cur.id])&&!cur.p)||(vars(BY[cur.id])&&!cur.v))return;const o={v:cur.v,s:cur.s,p:cur.p,d:cur.d,b:cur.b==='prem'?'prem':''};const k=mkKey(cur.id,o);cart[k]=(cart[k]||0)+1;const id=cur.id;closeS();updItem(id);}
 function closeS(){sog.classList.remove('show');if(!panel.classList.contains('show'))veil.classList.remove('show');}
 document.addEventListener('click',e=>{
   const oo=e.target.closest('[data-o]');if(oo){cur[oo.dataset.o]=oo.dataset.val;syncOpt();return;}
