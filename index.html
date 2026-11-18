@@ -3,19 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista de Precios — Gaita Polo</title>
-<meta name="description" content="Equipamiento premium para polo. Stock propio. Envíos a todo el mundo.">
-<meta property="og:title" content="Lista de Precios — Gaita Polo">
-<meta property="og:description" content="Equipamiento premium para polo. Stock propio. Envíos a todo el mundo.">
+<title>Lista de Precios - Gaita Polo</title>
+<meta name="description" content="Lista de precios de Gaita Polo. Elegí los productos y mandanos tu consulta por WhatsApp.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://gaitapololistadeprecios.netlify.app/">
-<meta property="og:image" content="https://gaitapololistadeprecios.netlify.app/og-image.jpg">
+<meta property="og:url" content="https://gaitapolo.netlify.app/">
+<meta property="og:title" content="Lista de Precios - Gaita Polo">
+<meta property="og:description" content="Elegí los productos y mandanos tu consulta por WhatsApp.">
+<meta property="og:image" content="https://gaitapolo.netlify.app/fotos/og-gaita.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://gaitapololistadeprecios.netlify.app/og-image.jpg">
+<link rel="icon" type="image/png" href="fotos/icono-gaita.png">
+<link rel="apple-touch-icon" href="fotos/icono-gaita.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+
 :root{--navy:#3A4F6A;--navy-dark:#2C3E52;--green:#3D5C49;--bit:#7A5C3E;--cream:#F7F5F2;--warm-gray:#E8E4DE;--mid-gray:#A8A096;--dark:#1A1A1A;--white:#FFF;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--dark);}
@@ -96,13 +100,253 @@ table.pt td{padding:11px 20px;vertical-align:middle;font-size:13.5px;}
   .tab-btn{padding:10px 10px 8px;font-size:11px;letter-spacing:.04em;}
   .price-val{font-size:13px;}
 }
+
+
+/* ===== Agregados del prototipo: vista lista/fotos, carrito de consulta, ampliar foto, WhatsApp flotante ===== */
+.proto-note{background:#F6ECD9;color:#7A5418;font-size:12.5px;text-align:center;padding:9px 16px;border-bottom:1px solid #EAD7B3;}
+.proto-note b{font-weight:600;}
+.view-toggle{margin-left:auto;display:flex;border:1.5px solid var(--warm-gray);border-radius:8px;overflow:hidden;background:#fff;flex-shrink:0;}
+.view-toggle button{font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;border:0;background:#fff;color:var(--mid-gray);padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:6px;}
+.view-toggle button.on{background:var(--navy-dark);color:#fff;}
+.view-toggle svg{width:14px;height:14px;}
+.search-bar{flex-wrap:wrap;}
+/* lista */
+.plist{display:flex;flex-direction:column;}
+.prow{display:grid;grid-template-columns:84px 1fr auto 118px;gap:16px;align-items:center;padding:10px 20px;border-bottom:1px solid #F0ECE7;}
+.prow:last-child{border-bottom:0;}
+.prow:hover{background:#F9F7F4;}
+.prow.sel{background:#F1F6F2;}
+.thumb{width:84px;height:48px;border-radius:6px;border:1px solid var(--warm-gray);background:#fff;padding:0;cursor:zoom-in;overflow:hidden;display:block;}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.thumb.none{cursor:default;background:#F4F1EC;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--mid-gray);text-align:center;line-height:1.2;}
+.pmeta{min-width:0;}
+.pmeta .pbrand{display:block;margin-top:3px;}
+.prow .price-cell{text-align:right;}
+/* fotos grandes */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding:16px;}
+.pcard{border:1px solid var(--warm-gray);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;background:#fff;}
+.pcard.sel{border-color:var(--green);box-shadow:0 0 0 1px var(--green);}
+.pcard .thumb{width:100%;height:auto;aspect-ratio:16/9;border:0;border-bottom:1px solid var(--warm-gray);border-radius:0;}
+.pcard .thumb.none{font-size:11px;}
+.pcard .pbody{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.pcard .pfoot{margin-top:auto;display:flex;flex-direction:column;gap:8px;}
+.pcard .price-cell{text-align:left;}
+/* botón agregar */
+.add{font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:600;border:1.5px solid var(--navy-dark);background:#fff;color:var(--navy-dark);border-radius:8px;padding:8px 10px;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:6px;}
+.add:hover{background:#EEF1F5;}
+.add svg{width:15px;height:15px;}
+.qty{display:flex;align-items:center;justify-content:space-between;border:1.5px solid var(--green);background:#E5EFE8;border-radius:8px;padding:2px;}
+.qty button{font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;width:32px;height:30px;border:0;border-radius:6px;background:#fff;color:var(--green);cursor:pointer;}
+.qty span{font-size:13px;font-weight:600;color:var(--green);}
+/* barra y panel */
+.cart-bar{position:fixed;left:0;right:0;bottom:0;background:var(--navy-dark);color:#fff;padding:12px 28px;display:none;z-index:150;box-shadow:0 -4px 16px rgba(0,0,0,.18);}
+.cart-bar.show{display:block;}
+.cb-wrap{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-right:64px;}
+.cb-sum{font-size:13px;}
+.cb-sum b{font-size:16px;font-weight:700;}
+.cart-bar button{font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;background:var(--green);color:#fff;border:0;border-radius:8px;padding:10px 16px;cursor:pointer;display:flex;align-items:center;gap:8px;}
+.veil{position:fixed;inset:0;background:rgba(20,28,38,.5);display:none;z-index:300;}
+.veil.show{display:block;}
+.panel{position:fixed;right:0;top:0;bottom:0;width:min(420px,100%);background:#fff;z-index:301;display:none;flex-direction:column;}
+.panel.show{display:flex;}
+.p-head{background:var(--navy);color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;}
+.p-head h2{font-size:15px;font-weight:600;}
+.x{background:none;border:0;color:#fff;font-size:24px;cursor:pointer;line-height:1;}
+.p-list{flex:1;overflow:auto;padding:12px 20px;display:flex;flex-direction:column;gap:10px;}
+.p-item{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;border-bottom:1px solid #F0ECE7;padding-bottom:10px;}
+.p-item .ph{width:60px;height:36px;border-radius:4px;border:1px solid var(--warm-gray);object-fit:cover;background:#F4F1EC;}
+.p-item .t{font-size:12.5px;font-weight:500;line-height:1.3;}
+.p-item .t small{display:block;color:var(--mid-gray);font-size:11px;font-weight:400;}
+.p-item .r{text-align:right;font-size:13px;font-weight:700;color:var(--navy);white-space:nowrap;}
+.p-item .r button{display:block;margin:2px 0 0 auto;font-family:'Poppins',sans-serif;font-size:11px;color:var(--mid-gray);background:none;border:0;cursor:pointer;text-decoration:underline;}
+.p-foot{border-top:1px solid var(--warm-gray);padding:14px 20px;display:flex;flex-direction:column;gap:10px;}
+.p-total{display:flex;justify-content:space-between;font-size:14px;font-weight:600;}
+.p-note{font-size:11.5px;color:var(--mid-gray);}
+.p-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.p-fields label{font-size:11px;color:var(--mid-gray);display:flex;flex-direction:column;gap:3px;}
+.p-fields input{font-family:'Poppins',sans-serif;font-size:13px;border:1.5px solid var(--warm-gray);border-radius:6px;padding:8px;}
+.send{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-size:14px;font-weight:600;background:#25D366;color:#fff;border-radius:8px;padding:12px;}
+/* ampliar foto */
+.zoom{position:fixed;inset:0;background:rgba(15,20,28,.88);z-index:400;display:none;align-items:center;justify-content:center;padding:24px;flex-direction:column;gap:14px;cursor:zoom-out;}
+.zoom.show{display:flex;}
+.zoom img{max-width:min(1000px,100%);max-height:78vh;border-radius:8px;background:#fff;}
+.zoom p{color:#fff;font-size:14px;font-weight:500;text-align:center;}
+.zoom .x{position:absolute;top:14px;right:20px;}
+/* whatsapp flotante */
+.wa-float{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:160;transition:bottom .2s;}
+.wa-float svg{width:30px;height:30px;}
+body.has-cart .wa-float{bottom:84px;}
+body.has-cart .footer{padding-bottom:96px;}
+.add:focus-visible,.qty button:focus-visible,.thumb:focus-visible,.view-toggle button:focus-visible,.cart-bar button:focus-visible,.wa-float:focus-visible,.send:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+@media (max-width:640px){
+  .prow{grid-template-columns:72px 1fr;row-gap:8px;padding:10px 14px;}
+  .thumb{width:72px;height:42px;}
+  .prow .price-cell{grid-column:2;text-align:left;}
+  .prow .ctl{grid-column:1 / -1;}
+  .p-fields{grid-template-columns:1fr;}
+  .cb-wrap{padding-right:0;}
+  body.has-cart .wa-float{bottom:132px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+
+
+.logo-img{width:auto!important;height:38px!important;}
+.zoom img{width:auto;height:auto;max-width:min(560px,100%);max-height:60vh;}
+.subfilter{display:flex;align-items:center;gap:6px;padding:12px 20px;border-bottom:1px solid #F0ECE7;flex-wrap:wrap;}
+.subfilter span{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mid-gray);margin-right:4px;}
+.sf{font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:500;border:1.5px solid var(--warm-gray);background:#fff;color:var(--dark);border-radius:20px;padding:5px 14px;cursor:pointer;}
+.sf.on{background:var(--bit);border-color:var(--bit);color:#fff;}
+.incart{font-size:11px;font-weight:600;color:var(--green);text-align:center;margin-bottom:4px;white-space:nowrap;}
+.qty.sm{display:inline-flex;margin-top:6px;gap:4px;padding:1px;}
+.qty.sm button{width:26px;height:24px;font-size:14px;}
+.qty.sm span{min-width:18px;text-align:center;font-size:12px;}
+.p-item small s,.opt s{color:var(--mid-gray);}
+.sog{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 32px));background:#fff;border-radius:12px;z-index:302;display:none;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.25);overflow:hidden;}
+.sog.show{display:flex;}
+.sog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 20px 12px;}
+.sog-head h3{font-size:16px;font-weight:600;}
+.sog-head p{font-size:12.5px;color:var(--mid-gray);margin-top:2px;}
+.x.dark{color:var(--dark);}
+.sog-opts{display:flex;flex-direction:column;gap:8px;padding:0 20px 20px;}
+.opt{font-family:'Poppins',sans-serif;display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--warm-gray);background:#fff;border-radius:10px;padding:12px 14px;cursor:pointer;}
+.opt:hover{border-color:var(--navy);}
+.opt .ol{font-size:13.5px;font-weight:600;color:var(--dark);display:flex;flex-direction:column;gap:2px;}
+.opt .ol small{font-size:11.5px;font-weight:400;color:var(--mid-gray);}
+.opt .ol em{font-style:normal;font-size:11.5px;font-weight:600;color:var(--green);}
+.opt .op{font-size:15px;font-weight:700;color:var(--navy);white-space:nowrap;}
+.opt.best{border-color:var(--green);background:#F1F6F2;}
+.opt:focus-visible,.sf:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+
+.og{display:flex;flex-direction:column;gap:6px;}
+.ot{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid-gray);}
+.ot small{text-transform:none;letter-spacing:0;font-weight:500;}
+.opt.picked{border-color:var(--navy-dark);box-shadow:0 0 0 1px var(--navy-dark);}
+.opt.best.picked{border-color:var(--green);box-shadow:0 0 0 1px var(--green);}
+.opt .op s{font-weight:500;font-size:12px;}
+.chk{display:flex;align-items:center;gap:8px;font-size:13px;border:1.5px solid var(--warm-gray);border-radius:10px;padding:10px 12px;cursor:pointer;}
+.chk input{width:16px;height:16px;accent-color:var(--green);}
+.chk b{margin-left:auto;color:var(--navy);}
+.ofoot{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--warm-gray);padding-top:12px;margin-top:4px;}
+.ofoot>div{display:flex;justify-content:space-between;font-size:14px;font-weight:600;}
+.ofoot .send{border:0;cursor:pointer;font-family:'Poppins',sans-serif;background:var(--navy);}
+.ofoot .send:hover:not(:disabled){background:var(--navy-dark);}
+.ofoot .send:disabled{background:var(--mid-gray);cursor:not-allowed;}
+.ofoot .send svg{width:16px;height:16px;}
+.sog{max-height:calc(100vh - 32px);overflow:auto;}
+.sog-opts{gap:14px;}
+
+.thumb.none{background:#fff;padding:6px;}
+.thumb.none img{object-fit:contain;opacity:.9;}
+.pcard .thumb.none{padding:28px;}
+.p-item .ph.none{object-fit:contain;background:#fff;padding:4px;}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px;transition:opacity .15s;}
+.sw.off{opacity:.45;}
+.swb{font-family:'Poppins',sans-serif;font-size:11.5px;display:flex;align-items:center;gap:6px;border:1.5px solid var(--warm-gray);background:#fff;border-radius:8px;padding:5px 7px;cursor:pointer;text-align:left;color:var(--dark);}
+.swb span{width:18px;height:18px;border-radius:50%;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);}
+.swb.picked{border-color:var(--navy-dark);box-shadow:0 0 0 1px var(--navy-dark);}
+.swb:focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.onote{font-size:12.5px;color:var(--dark);}
+
+.pay{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px;}
+.pay legend{font-size:11px;color:var(--mid-gray);margin-bottom:4px;width:100%;}
+.pay label{flex:1 1 auto;display:flex;align-items:center;gap:6px;font-size:12.5px;border:1.5px solid var(--warm-gray);border-radius:8px;padding:8px 10px;cursor:pointer;white-space:nowrap;}
+.pay label:has(input:checked){border-color:var(--navy-dark);box-shadow:0 0 0 1px var(--navy-dark);}
+.pay input{accent-color:var(--navy);}
+.p-fields label.err input,.pay.err label{border-color:#C0392B;}
+.send-err{font-size:12px;color:#C0392B;}
+.p-foot{overflow:auto;}
+
+.delivery-note{max-width:1080px;margin:20px auto 0;padding:0 28px;display:flex;}
+.delivery-note{gap:10px;align-items:flex-start;}
+.delivery-note>span{font-size:12.5px;line-height:1.5;color:var(--dark);background:#EAF1EC;border:1px solid #CFE0D4;border-radius:10px;padding:10px 14px;flex:1;}
+.delivery-note>svg{display:none;}
+.delivery-note b{font-weight:600;color:var(--green);}
+#delBox label{white-space:normal;flex:1 1 100%;}
+#delBox small{color:var(--mid-gray);}
+.delivery-note+.search-bar{margin-top:16px;}
+@media (max-width:640px){.delivery-note{padding:0 16px;}}
+
+.del-info{width:100%;font-size:12px;line-height:1.45;background:#EAF1EC;border:1px solid #CFE0D4;border-radius:8px;padding:8px 10px;margin-bottom:2px;}
+.del-info b{font-weight:600;color:var(--green);}
+
+.addr{width:100%;display:flex;flex-direction:column;gap:4px;background:#FAFAF8;border:1px dashed var(--warm-gray);border-radius:8px;padding:10px;}
+.pay .addr-l{border:0;padding:0;flex-direction:column;align-items:stretch;gap:3px;font-size:11px;color:var(--mid-gray);white-space:normal;cursor:default;}
+.pay .addr-l:has(input:checked){box-shadow:none;}
+.addr-l input{font-family:'Poppins',sans-serif;font-size:13px;border:1.5px solid var(--warm-gray);border-radius:6px;padding:8px;color:var(--dark);}
+.addr-l.err input{border-color:#C0392B;}
+.addr-n{font-size:11.5px;color:var(--dark);}
+.addr[hidden]{display:none;}
+
+.opt.best{border-color:var(--warm-gray);background:#fff;}
+.opt.best.picked{border-color:var(--navy-dark);box-shadow:0 0 0 1px var(--navy-dark);background:#fff;}
+.opt .ol em{color:var(--mid-gray);font-weight:500;}
+.badge{align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#C8A96E;color:#fff;border-radius:20px;padding:2px 9px;margin-bottom:3px;}
+
+.steps{display:flex;gap:6px;margin-top:6px;}
+.st{font-size:11px;font-weight:500;color:rgba(255,255,255,.55);background:rgba(255,255,255,.1);border-radius:20px;padding:2px 10px;}
+.st.on{color:#fff;background:rgba(255,255,255,.22);}
+#step2{display:none;flex-direction:column;gap:10px;}
+.panel.s2 #step2{display:flex;}
+.panel.s2 #step1,.panel.s2 .p-list{display:none;}
+.panel.s2 .p-foot{flex:1;overflow:auto;border-top:0;}
+.p-foot{overflow:visible;}
+.next{font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:12px;width:100%;cursor:pointer;}
+.next:hover{background:var(--navy-dark);}
+.back{align-self:flex-start;font-family:'Poppins',sans-serif;font-size:12px;background:none;border:0;color:var(--navy);cursor:pointer;padding:0;text-decoration:underline;}
+/* items compactos */
+.p-list{gap:0;padding:6px 16px;}
+.p-item{grid-template-columns:48px 1fr auto;gap:10px;padding:8px 0;}
+.p-item .ph{width:48px;height:30px;}
+.p-item .t{font-size:12px;line-height:1.25;}
+.p-item .t small{font-size:10.5px;line-height:1.3;}
+.p-item .r{font-size:12.5px;}
+.p-item .r button{font-size:10.5px;}
+.qty.sm{margin-top:4px;}
+.qty.sm button{width:22px;height:20px;font-size:13px;}
+.qty.sm span{font-size:11.5px;min-width:16px;}
+
+.idle{position:fixed;right:20px;bottom:88px;width:min(290px,calc(100% - 40px));background:#fff;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.2);padding:16px 16px 14px;z-index:170;border-top:4px solid var(--navy);animation:idleIn .25s ease-out;}
+.idle[hidden]{display:none;}
+.idle-t{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:2px;padding-right:20px;}
+.idle-p{font-size:12.5px;color:#555;line-height:1.45;margin-bottom:10px;}
+.idle-b{display:block;text-align:center;text-decoration:none;font-size:13px;font-weight:600;background:#25D366;color:#fff;border-radius:8px;padding:9px;}
+.idle-x{position:absolute;top:8px;right:10px;background:none;border:0;font-size:20px;line-height:1;color:var(--mid-gray);cursor:pointer;}
+body.has-cart .idle{bottom:152px;}
+@keyframes idleIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+@media (max-width:640px){body.has-cart .idle{bottom:200px;}}
+
+.idle{border-top:0;border-radius:14px 14px 4px 14px;right:24px;bottom:90px;padding:14px 16px 12px;box-shadow:0 6px 24px rgba(0,0,0,.18);}
+.idle::after{content:"";position:absolute;right:18px;bottom:-8px;width:16px;height:16px;background:#fff;transform:rotate(45deg);box-shadow:4px 4px 8px rgba(0,0,0,.06);border-radius:0 0 3px 0;}
+.idle-t{color:var(--navy);}
+.wa-float.ping::before{content:"";position:absolute;inset:0;border-radius:50%;background:#25D366;animation:waPing 1.6s ease-out infinite;z-index:-1;}
+@keyframes waPing{0%{transform:scale(1);opacity:.6;}100%{transform:scale(1.7);opacity:0;}}
+@media (prefers-reduced-motion:reduce){.wa-float.ping::before{animation:none;}}
+
+.idle{width:auto;padding:12px 38px 12px 16px;}
+a.idle-t{display:block;margin:0;padding:0;text-decoration:none;white-space:nowrap;}
+
+.prow .pname,.pcard .pname{font-size:13px;line-height:1.3;}
+.prow .pdetail,.pcard .pdetail{font-size:11px;}
+.prow .pbrand,.pcard .pbrand{font-size:10.5px;}
+.prow .price-val,.pcard .price-val{font-size:14px;}
+.prow .price-cur,.pcard .price-cur{font-size:9.5px;}
+.prow .add,.pcard .add{font-size:12px;padding:7px 10px;}
+
+.prow.sel{background:#fff;box-shadow:inset 3px 0 0 var(--navy);}
+.pcard.sel{border-color:var(--navy);box-shadow:0 0 0 1px var(--navy);}
+.incart{color:var(--navy);}
+.incart::before{content:"✓ ";}
+.empty{align-self:flex-end;font-family:'Poppins',sans-serif;font-size:11px;background:none;border:0;color:var(--mid-gray);text-decoration:underline;cursor:pointer;padding:0;margin-top:-4px;}
+.panel.s2 .empty{display:none;}
+.loading{padding:40px 0;text-align:center;color:var(--mid-gray);font-size:13px;}
 </style>
 </head>
 <body>
 <header class="header">
   <div class="header-top">
     <div class="logo-area">
-      <img class="logo-img" src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAPoA+gDASIAAhEBAxEB/8QAHQABAAMAAgMBAAAAAAAAAAAAAAcICQQFAQIGA//EAFQQAQABAwEDBgYLCwwBAgcAAAABAgMEBQYHEQgYIVaV0xIxQVF1lBMVNzhVYXGBsrTRCSIyNlJTdJGTsdIUFiMkM0JicnN2obOCQ6IXNGODkqPB/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AKZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/XFxsjLvRYxbF2/dnxUW6J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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/2Q==" alt="Gaita Polo">
+      <img class="logo-img" src="data:image/png;base64,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" alt="Gaita Polo">
       <div class="logo-text"><span class="brand">Gaita Polo</span><span class="sub">Equipamiento premium para polo</span></div>
     </div>
     <div class="header-contacts">
@@ -114,502 +358,284 @@ table.pt td{padding:11px 20px;vertical-align:middle;font-size:13.5px;}
   </div>
   <div class="header-bottom">
     <span class="hb-chip">Stock propio</span><span class="hb-dot"></span>
-    <span class="hb-chip">Envíos a <strong>todo el mundo</strong></span><span class="hb-dot"></span>
-    <span class="hb-chip">Precios en <strong>USD</strong></span><span class="hb-dot"></span>
+    <span class="hb-chip">Envíos a todo el mundo</span><span class="hb-dot"></span>
+    <span class="hb-chip">Precios en USD</span><span class="hb-dot"></span>
     <span class="hb-chip">Los precios pueden actualizarse sin previo aviso</span>
   </div>
 </header>
 <div class="search-bar">
   <div class="search-wrap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" class="search-input" id="searchInput" placeholder="Buscar producto..." oninput="handleSearch()"></div>
+    <input type="text" class="search-input" id="searchInput" placeholder="Buscar producto..." aria-label="Buscar producto"></div>
   <span class="result-count" id="resultCount"></span>
+  <div class="view-toggle" role="group" aria-label="Forma de ver los productos">
+    <button type="button" class="on" data-v="list" id="vList"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg>Lista</button>
+    <button type="button" data-v="grid" id="vGrid"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></svg>Fotos grandes</button>
+  </div>
 </div>
-<div id="searchResults"><div class="search-results-table"><div class="search-results-label">Resultados de búsqueda</div>
-  <table class="pt"><thead><tr><th style="width:42%">Producto</th><th>Categoría</th><th>Marca</th><th class="r">Precio</th></tr></thead><tbody id="searchResultsBody"></tbody></table></div></div>
+<div id="searchResults"><div class="search-results-table"><div class="search-results-label">Resultados de búsqueda</div><div id="searchResultsBody"></div></div></div>
 <div class="tabs-wrap"><div class="tabs">
-  <button class="tab-btn active-player" onclick="switchTab('player')" id="tab-player">Jugador</button>
-  <button class="tab-btn" onclick="switchTab('horse')" id="tab-horse">Caballo</button>
-  <button class="tab-btn" onclick="switchTab('bit')" id="tab-bit">Embocaduras</button>
+  <button class="tab-btn" data-tab="player" id="tab-player">Jugador</button>
+  <button class="tab-btn" data-tab="horse" id="tab-horse">Caballo</button>
+  <button class="tab-btn" data-tab="bit" id="tab-bit">Embocaduras</button>
 </div></div>
-<div class="content">
-  <div class="tab-panel active" id="panel-player">
-    <div class="section player" id="sp01">
-      <div class="section-hd" onclick="toggleSec('sp01')">
-        <div class="section-left">
-          <span class="sec-name">Anteojos</span>
-          <span class="sec-count">9 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="jawbreaker photochromic oakley modelo 0oo9290 14"><td class="col-name"><div class="pname">Jawbreaker Photochromic</div><div class="pdetail">Modelo 0OO9290 14</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">365</span></td></tr>
-            <tr data-search="radar ev heater prizm black polar oakley "><td class="col-name"><div class="pname">Radar EV Heater Prizm Black Polar</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">345</span></td></tr>
-            <tr data-search="repuesto jawbreaker clear oakley "><td class="col-name"><div class="pname">Repuesto Jawbreaker Clear</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">95</span></td></tr>
-            <tr data-search="repuesto jawbreaker photochromic oakley "><td class="col-name"><div class="pname">Repuesto Jawbreaker Photochromic</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">165</span></td></tr>
-            <tr data-search="repuesto sutro lite photochromic oakley "><td class="col-name"><div class="pname">Repuesto Sutro Lite Photochromic</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">150</span></td></tr>
-            <tr data-search="sutro lite clear photochromic oakley modelo 0oo9463"><td class="col-name"><div class="pname">Sutro Lite Clear Photochromic</div><div class="pdetail">Modelo 0OO9463</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">290</span></td></tr>
-            <tr data-search="sutro lite prizm black oakley modelo 0oo9463"><td class="col-name"><div class="pname">Sutro Lite Prizm Black</div><div class="pdetail">Modelo 0OO9463</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">275</span></td></tr>
-            <tr data-search="sutro lite sweep clear photochromic oakley "><td class="col-name"><div class="pname">Sutro Lite Sweep Clear Photochromic</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">290</span></td></tr>
-            <tr data-search="sutro lite sweep prizm black oakley "><td class="col-name"><div class="pname">Sutro Lite Sweep Prizm Black</div></td><td><span class="pbrand">Oakley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">265</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section player" id="sp02">
-      <div class="section-hd" onclick="toggleSec('sp02')">
-        <div class="section-left">
-          <span class="sec-name">Bochas</span>
-          <span class="sec-count">8 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="bocha de polo blanda con logo sin marca minimo 100 unidades"><td class="col-name"><div class="pname">Bocha de polo blanda con logo</div><div class="pdetail">Mínimo 100 unidades</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">2.5</span></td></tr>
-            <tr data-search="bocha de polo blanda sin logo sin marca "><td class="col-name"><div class="pname">Bocha de polo blanda sin logo</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">2</span></td></tr>
-            <tr data-search="bocha de polo dura con logo sin marca minimo 100 unidades"><td class="col-name"><div class="pname">Bocha de polo dura con logo</div><div class="pdetail">Mínimo 100 unidades</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">2.5</span></td></tr>
-            <tr data-search="bocha de polo dura sin logo sin marca "><td class="col-name"><div class="pname">Bocha de polo dura sin logo</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">2</span></td></tr>
-            <tr data-search="bocha de polo indoor sin marca color blanco o rojo"><td class="col-name"><div class="pname">Bocha de polo Indoor</div><div class="pdetail">Color blanco ó rojo</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">3.5</span></td></tr>
-            <tr data-search="bochero comun gaita polo "><td class="col-name"><div class="pname">Bochero común</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">60</span></td></tr>
-            <tr data-search="bochero indoor gaita polo "><td class="col-name"><div class="pname">Bochero indoor</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">70</span></td></tr>
-            <tr data-search="matriz para bocha con logo sin marca "><td class="col-name"><div class="pname">Matriz para bocha con logo</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">100</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section player" id="sp03">
-      <div class="section-hd" onclick="toggleSec('sp03')">
-        <div class="section-left">
-          <span class="sec-name">Bolsos</span>
-          <span class="sec-count">4 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="bolso de viaje large gaita polo "><td class="col-name"><div class="pname">Bolso de viaje large</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">175</span></td></tr>
-            <tr data-search="bolso de viaje small gaita polo "><td class="col-name"><div class="pname">Bolso de viaje small</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">150</span></td></tr>
-            <tr data-search="bolso para montura gaita polo "><td class="col-name"><div class="pname">Bolso para montura</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">40</span></td></tr>
-            <tr data-search="bolso taquero tato's "><td class="col-name"><div class="pname">Bolso taquero</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">240</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section player" id="sp04">
-      <div class="section-hd" onclick="toggleSec('sp04')">
-        <div class="section-left">
-          <span class="sec-name">Botas</span>
-          <span class="sec-count">6 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="bota doble cuero con cierre tato's a medida"><td class="col-name"><div class="pname">Bota doble cuero con cierre</div><div class="pdetail">A medida</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">795</span></td></tr>
-            <tr data-search="bota doble cuero con cierre tato's de stock"><td class="col-name"><div class="pname">Bota doble cuero con cierre</div><div class="pdetail">De stock</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">650</span></td></tr>
-            <tr data-search="bota premier con cierre tato's "><td class="col-name"><div class="pname">Bota premier con cierre</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">1350</span></td></tr>
-            <tr data-search="bota texana tato's "><td class="col-name"><div class="pname">Bota texana</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">780</span></td></tr>
-            <tr data-search="bota triple cuero con cierre tato's "><td class="col-name"><div class="pname">Bota triple cuero con cierre</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">940</span></td></tr>
-            <tr data-search="bota velcro tato's "><td class="col-name"><div class="pname">Bota velcro</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">820</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section player" id="sp05">
-      <div class="section-hd" onclick="toggleSec('sp05')">
-        <div class="section-left">
-          <span class="sec-name">Cascos</span>
-          <span class="sec-count">10 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="h1 clasico de cuero o sublimado gaita polo homologado para argentina"><td class="col-name"><div class="pname">H1 clásico de cuero o sublimado</div><div class="pdetail">Homologado para Argentina</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">430</span></td></tr>
-            <tr data-search="h1 clasico de tela gaita polo homologado para argentina"><td class="col-name"><div class="pname">H1 clásico de tela</div><div class="pdetail">Homologado para Argentina</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">400</span></td></tr>
-            <tr data-search="h1 lock de cuero o sublimado gaita polo homologado para argentina"><td class="col-name"><div class="pname">H1 lock de cuero o sublimado</div><div class="pdetail">Homologado para Argentina</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">430</span></td></tr>
-            <tr data-search="h1 lock de tela gaita polo homologado para argentina"><td class="col-name"><div class="pname">H1 lock de tela</div><div class="pdetail">Homologado para Argentina</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">400</span></td></tr>
-            <tr data-search="instinct instinct modelo askari"><td class="col-name"><div class="pname">Instinct</div><div class="pdetail">Modelo Askari</div></td><td><span class="pbrand">Instinct</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">725</span></td></tr>
-            <tr data-search="repuesto interno casco instinct instinct disponible en talle xs, s, m, l y xl"><td class="col-name"><div class="pname">Repuesto interno casco Instinct</div><div class="pdetail">Disponible en talle XS, S, M, L y XL</div></td><td><span class="pbrand">Instinct</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">35</span></td></tr>
-            <tr data-search="shield clasico de cuero o sublimado gaita polo "><td class="col-name"><div class="pname">Shield clásico de cuero o sublimado</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">210</span></td></tr>
-            <tr data-search="shield clasico de tela gaita polo "><td class="col-name"><div class="pname">Shield clásico de tela</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">190</span></td></tr>
-            <tr data-search="shield lock de cuero o sublimado gaita polo "><td class="col-name"><div class="pname">Shield lock de cuero o sublimado</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">220</span></td></tr>
-            <tr data-search="shield lock de tela gaita polo "><td class="col-name"><div class="pname">Shield lock de tela</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">200</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section player" id="sp06">
-      <div class="section-hd" onclick="toggleSec('sp06')">
-        <div class="section-left">
-          <span class="sec-name">Fustas</span>
-          <span class="sec-count">2 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="fusta con mango de cuero gaita polo disponible en mas de 15 colores"><td class="col-name"><div class="pname">Fusta con mango de cuero</div><div class="pdetail">Disponible en más de 15 colores</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">20</span></td></tr>
-            <tr data-search="fusta con mango de grip gaita polo disponible en mas de 15 colores"><td class="col-name"><div class="pname">Fusta con mango de grip</div><div class="pdetail">Disponible en más de 15 colores</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">20</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section player" id="sp07">
-      <div class="section-hd" onclick="toggleSec('sp07')">
-        <div class="section-left">
-          <span class="sec-name">Indumentaria y accesorios</span>
-          <span class="sec-count">3 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="jean performance tato's disponible en color blanco y negro"><td class="col-name"><div class="pname">Jean Performance</div><div class="pdetail">Disponible en color blanco y negro</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">180</span></td></tr>
-            <tr data-search="jean pro polo ii tato's disponible en color blanco y negro"><td class="col-name"><div class="pname">Jean Pro Polo II</div><div class="pdetail">Disponible en color blanco y negro</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">140</span></td></tr>
-            <tr data-search="macwet aquatec macwet precio por par. disponible en talle 7, 8, 9 y 10"><td class="col-name"><div class="pname">MacWet Aquatec®</div><div class="pdetail">Precio por par. Disponible en talle 7, 8, 9 y 10</div></td><td><span class="pbrand">Macwet</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">80</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section player" id="sp08">
-      <div class="section-hd" onclick="toggleSec('sp08')">
-        <div class="section-left">
-          <span class="sec-name">Protección</span>
-          <span class="sec-count">8 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="codera tato's precio por par, disponibles en talle xs, s, m, l y xl"><td class="col-name"><div class="pname">Codera</div><div class="pdetail">Precio por par, disponibles en talle XS, S, M, L y XL</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">125</span></td></tr>
-            <tr data-search="personalizacion de rodilleras gaita polo bordado"><td class="col-name"><div class="pname">Personalización de rodilleras</div><div class="pdetail">Bordado</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">40</span></td></tr>
-            <tr data-search="repuesto de rodillera de hebilla gaita polo "><td class="col-name"><div class="pname">Repuesto de rodillera de hebilla</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">8</span></td></tr>
-            <tr data-search="repuesto de rodillera de velcro gaita polo "><td class="col-name"><div class="pname">Repuesto de rodillera de velcro</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">8</span></td></tr>
-            <tr data-search="rodillera de cuero con hebilla tato's "><td class="col-name"><div class="pname">Rodillera de cuero con hebilla</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">225</span></td></tr>
-            <tr data-search="rodillera de cuero con hebilla gaita polo "><td class="col-name"><div class="pname">Rodillera de cuero con hebilla</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">120</span></td></tr>
-            <tr data-search="rodillera de cuero con velcro tato's "><td class="col-name"><div class="pname">Rodillera de cuero con velcro</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">215</span></td></tr>
-            <tr data-search="rodillera de cuero con velcro gaita polo "><td class="col-name"><div class="pname">Rodillera de cuero con velcro</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">105</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-  </div>
-  <div class="tab-panel" id="panel-horse">
-    <div class="section horse" id="sh01">
-      <div class="section-hd" onclick="toggleSec('sh01')">
-        <div class="section-left">
-          <span class="sec-name">Accesorios</span>
-          <span class="sec-count">11 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="balde para caballo 19 lts sin marca "><td class="col-name"><div class="pname">Balde para caballo 19 Lts</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">36</span></td></tr>
-            <tr data-search="horquilla plastica con cabo sin marca "><td class="col-name"><div class="pname">Horquilla plástica con cabo</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">30</span></td></tr>
-            <tr data-search="horquilla plastica sin cabo sin marca "><td class="col-name"><div class="pname">Horquilla plástica sin cabo</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">26</span></td></tr>
-            <tr data-search="jabon de glicerina - balde x1.2kg equicare "><td class="col-name"><div class="pname">Jabón de glicerina - Balde x1.2kg</div></td><td><span class="pbrand">Equicare</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">20</span></td></tr>
-            <tr data-search="jabon de glicerina - balde x4kg equicare "><td class="col-name"><div class="pname">Jabón de glicerina - Balde x4kg</div></td><td><span class="pbrand">Equicare</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">65</span></td></tr>
-            <tr data-search="jabon de glicerina - barra x 1kg negro sin marca "><td class="col-name"><div class="pname">Jabón de glicerina - Barra x 1kg negro</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">7</span></td></tr>
-            <tr data-search="peine para tusar ceramic edge #40 andis "><td class="col-name"><div class="pname">Peine para tusar Ceramic Edge #40</div></td><td><span class="pbrand">Andis</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">65</span></td></tr>
-            <tr data-search="peine para tusar cryogenx #50 oster "><td class="col-name"><div class="pname">Peine para tusar CryoGenX #50</div></td><td><span class="pbrand">Oster</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">60</span></td></tr>
-            <tr data-search="peine para tusar ultra edge #t-84 andis "><td class="col-name"><div class="pname">Peine para tusar Ultra Edge #T-84</div></td><td><span class="pbrand">Andis</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">75</span></td></tr>
-            <tr data-search="trompeta de cuero estilo americano gaita polo fabricada con cuero latigo"><td class="col-name"><div class="pname">Trompeta de cuero estilo Americano</div><div class="pdetail">Fabricada con cuero látigo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">45</span></td></tr>
-            <tr data-search="trompeta de plastico gaita polo "><td class="col-name"><div class="pname">Trompeta de plástico</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">26</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section horse" id="sh02">
-      <div class="section-hd" onclick="toggleSec('sh02')">
-        <div class="section-left">
-          <span class="sec-name">Bozales</span>
-          <span class="sec-count">9 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="bozal de cuero crudo trenza patria gaita polo "><td class="col-name"><div class="pname">Bozal de cuero crudo trenza patria</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">150</span></td></tr>
-            <tr data-search="bozal de cuero crudo trenza redonda gaita polo "><td class="col-name"><div class="pname">Bozal de cuero crudo trenza redonda</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">120</span></td></tr>
-            <tr data-search="bozal de soga trenzada con estrella gaita polo incluye cabresto"><td class="col-name"><div class="pname">Bozal de soga trenzada con estrella</div><div class="pdetail">Incluye cabresto</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">72</span></td></tr>
-            <tr data-search="bozal de soga trenzada con frentera personalizada gaita polo incluye cabresto"><td class="col-name"><div class="pname">Bozal de soga trenzada con frentera personalizada</div><div class="pdetail">Incluye cabresto</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">77</span></td></tr>
-            <tr data-search="bozal de soga trenzada sin estrella gaita polo incluye cabresto"><td class="col-name"><div class="pname">Bozal de soga trenzada sin estrella</div><div class="pdetail">Incluye cabresto</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">67</span></td></tr>
-            <tr data-search="bozal simple con hociquera de color gaita polo "><td class="col-name"><div class="pname">Bozal simple con hociquera de color</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">39</span></td></tr>
-            <tr data-search="bozal simple de nudo gaita polo "><td class="col-name"><div class="pname">Bozal simple de nudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">33</span></td></tr>
-            <tr data-search="cabresto de cuero gaita polo "><td class="col-name"><div class="pname">Cabresto de cuero</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">40</span></td></tr>
-            <tr data-search="cabresto de soga gaita polo "><td class="col-name"><div class="pname">Cabresto de soga</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">13</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section horse" id="sh03">
-      <div class="section-hd" onclick="toggleSec('sh03')">
-        <div class="section-left">
-          <span class="sec-name">Cabezadas</span>
-          <span class="sec-count">22 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="bajador gaita polo "><td class="col-name"><div class="pname">Bajador</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">27</span></td></tr>
-            <tr data-search="cabezada completa gaita polo "><td class="col-name"><div class="pname">Cabezada completa</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">170</span></td></tr>
-            <tr data-search="cabezada para levantador gaita polo no incluye freno ni pretal"><td class="col-name"><div class="pname">Cabezada para levantador</div><div class="pdetail">No incluye freno ni pretal</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">128</span></td></tr>
-            <tr data-search="cabezada para pelham gaita polo no incluye freno ni pretal"><td class="col-name"><div class="pname">Cabezada para pelham</div><div class="pdetail">No incluye freno ni pretal</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">140</span></td></tr>
-            <tr data-search="cierraboca gaita polo "><td class="col-name"><div class="pname">Cierraboca</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">23</span></td></tr>
-            <tr data-search="cierraboca redondo gaita polo trenzado de cuero crudo"><td class="col-name"><div class="pname">Cierraboca redondo</div><div class="pdetail">Trenzado de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">40</span></td></tr>
-            <tr data-search="frentera gaita polo "><td class="col-name"><div class="pname">Frentera</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">7</span></td></tr>
-            <tr data-search="frentera diamante gaita polo "><td class="col-name"><div class="pname">Frentera diamante</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">14</span></td></tr>
-            <tr data-search="hociquera patria ancha gaita polo trenzada de cuero crudo"><td class="col-name"><div class="pname">Hociquera patria ancha</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">95</span></td></tr>
-            <tr data-search="hociquera patria fina gaita polo trenzada de cuero crudo"><td class="col-name"><div class="pname">Hociquera patria fina</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">65</span></td></tr>
-            <tr data-search="hociquera plana gaita polo "><td class="col-name"><div class="pname">Hociquera plana</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">23</span></td></tr>
-            <tr data-search="hociquera redonda gaita polo trenzada de cuero crudo"><td class="col-name"><div class="pname">Hociquera redonda</div><div class="pdetail">Trenzada de cuero crudo</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">40</span></td></tr>
-            <tr data-search="montantes gaita polo precio por par"><td class="col-name"><div class="pname">Montantes</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">14</span></td></tr>
-            <tr data-search="pretal con plantilla gaita polo "><td class="col-name"><div class="pname">Pretal con plantilla</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">39</span></td></tr>
-            <tr data-search="pretal sin plantilla gaita polo "><td class="col-name"><div class="pname">Pretal sin plantilla</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">33</span></td></tr>
-            <tr data-search="rienda cocida gaita polo "><td class="col-name"><div class="pname">Rienda cocida</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">23</span></td></tr>
-            <tr data-search="rienda con hebilla gaita polo "><td class="col-name"><div class="pname">Rienda con hebilla</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">23</span></td></tr>
-            <tr data-search="rienda de agua gaita polo"><td class="col-name"><div class="pname">Rienda de agua</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">45</span></td></tr>
-            <tr data-search="riendilla gaita polo "><td class="col-name"><div class="pname">Riendilla</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">36</span></td></tr>
-            <tr data-search="riendilla de agua gaita polo"><td class="col-name"><div class="pname">Riendilla de agua</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">65</span></td></tr>
-            <tr data-search="testera gaita polo "><td class="col-name"><div class="pname">Testera</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">19</span></td></tr>
-            <tr data-search="testera completa gaita polo incluye testera, frentera y un par de montantes"><td class="col-name"><div class="pname">Testera completa</div><div class="pdetail">Incluye testera, frentera y un par de montantes</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">38</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section horse" id="sh04">
-      <div class="section-hd" onclick="toggleSec('sh04')">
-        <div class="section-left">
-          <span class="sec-name">Cinchas y Sobrecinchas</span>
-          <span class="sec-count">12 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="cincha elastica tato's disponible en 110, 115 y 120 cm"><td class="col-name"><div class="pname">Cincha elástica</div><div class="pdetail">Disponible en 110, 115 y 120 cm</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="cincha elastica prochoice disponible en 115 y 120 cm"><td class="col-name"><div class="pname">Cincha elástica</div><div class="pdetail">Disponible en 115 y 120 cm</div></td><td><span class="pbrand">ProChoice</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">165</span></td></tr>
-            <tr data-search="cincha elastica epona disponible en 110, 115 y 120 cm"><td class="col-name"><div class="pname">Cincha elástica</div><div class="pdetail">Disponible en 110, 115 y 120 cm</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">120</span></td></tr>
-            <tr data-search="cincha equalizer tato's disponible en 110, 115 y 120 cm"><td class="col-name"><div class="pname">Cincha Equalizer</div><div class="pdetail">Disponible en 110, 115 y 120 cm</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">115</span></td></tr>
-            <tr data-search="cincha equalizer prochoice disponible en 115 y 120 cm"><td class="col-name"><div class="pname">Cincha Equalizer</div><div class="pdetail">Disponible en 115 y 120 cm</div></td><td><span class="pbrand">ProChoice</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">165</span></td></tr>
-            <tr data-search="cincha equalizer epona disponible en 110, 115 y 120 cm"><td class="col-name"><div class="pname">Cincha Equalizer</div><div class="pdetail">Disponible en 110, 115 y 120 cm</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">120</span></td></tr>
-            <tr data-search="cincha fija epona disponible en 110, 115 y 120 cm"><td class="col-name"><div class="pname">Cincha fija</div><div class="pdetail">Disponible en 110, 115 y 120 cm</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">90</span></td></tr>
-            <tr data-search="cincha mixta epona disponible en 110, 115 y 120 cm"><td class="col-name"><div class="pname">Cincha mixta</div><div class="pdetail">Disponible en 110, 115 y 120 cm</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">110</span></td></tr>
-            <tr data-search="repuesto neoprene tato's "><td class="col-name"><div class="pname">Repuesto neoprene</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">32</span></td></tr>
-            <tr data-search="repuesto neoprene epona "><td class="col-name"><div class="pname">Repuesto neoprene</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">30</span></td></tr>
-            <tr data-search="sobrecincha con guarda pampa gaita polo "><td class="col-name"><div class="pname">Sobrecincha con guarda pampa</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">26</span></td></tr>
-            <tr data-search="sobrecincha elastica con guarda pampa gaita polo "><td class="col-name"><div class="pname">Sobrecincha elástica con guarda pampa</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">32</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section horse" id="sh05">
-      <div class="section-hd" onclick="toggleSec('sh05')">
-        <div class="section-left">
-          <span class="sec-name">Estribos y estriberas</span>
-          <span class="sec-count">5 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="almohadilla para estribo sin marca "><td class="col-name"><div class="pname">Almohadilla para estribo</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">48</span></td></tr>
-            <tr data-search="estribera de bufalo gaita polo disponible en color marron y negro."><td class="col-name"><div class="pname">Estribera de búfalo</div><div class="pdetail">Disponible en color marrón y negro.</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">60</span></td></tr>
-            <tr data-search="estribera de bufalo ingles rojo tato's "><td class="col-name"><div class="pname">Estribera de búfalo inglés rojo</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">180</span></td></tr>
-            <tr data-search="estribera triple capa tato's dos capas de cuero reforzadas con nylon"><td class="col-name"><div class="pname">Estribera triple capa</div><div class="pdetail">Dos capas de cuero reforzadas con nylon</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">165</span></td></tr>
-            <tr data-search="estribo australiano con lija sin marca "><td class="col-name"><div class="pname">Estribo australiano con lija</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">80</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section horse" id="sh06">
-      <div class="section-hd" onclick="toggleSec('sh06')">
-        <div class="section-left">
-          <span class="sec-name">Matras y mandiles</span>
-          <span class="sec-count">6 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="bajomontura epona "><td class="col-name"><div class="pname">Bajomontura</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">65</span></td></tr>
-            <tr data-search="bajomontura the husk "><td class="col-name"><div class="pname">Bajomontura</div></td><td><span class="pbrand">The Husk</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">100</span></td></tr>
-            <tr data-search="cojinillo blanco gaita polo "><td class="col-name"><div class="pname">Cojinillo blanco</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">120</span></td></tr>
-            <tr data-search="cojinillo marron gaita polo "><td class="col-name"><div class="pname">Cojinillo marrón</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">120</span></td></tr>
-            <tr data-search="matra lisa gaita polo disponible en mas de 15 colores"><td class="col-name"><div class="pname">Matra lisa</div><div class="pdetail">Disponible en más de 15 colores</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">18</span></td></tr>
-            <tr data-search="matra pampa gaita polo disponible en mas de 15 colores"><td class="col-name"><div class="pname">Matra pampa</div><div class="pdetail">Disponible en más de 15 colores</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">18</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section horse" id="sh07">
-      <div class="section-hd" onclick="toggleSec('sh07')">
-        <div class="section-left">
-          <span class="sec-name">Monturas</span>
-          <span class="sec-count">2 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="montura modelo americano gaita polo sin porta estribera"><td class="col-name"><div class="pname">Montura modelo Americano</div><div class="pdetail">Sin porta estribera</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">370</span></td></tr>
-            <tr data-search="montura modelo bauti gaita polo sin porta estribera"><td class="col-name"><div class="pname">Montura modelo Bauti</div><div class="pdetail">Sin porta estribera</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">380</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section horse" id="sh08">
-      <div class="section-hd" onclick="toggleSec('sh08')">
-        <div class="section-left">
-          <span class="sec-name">Protección</span>
-          <span class="sec-count">10 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="colero epona "><td class="col-name"><div class="pname">Colero</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">30</span></td></tr>
-            <tr data-search="colero prochoice "><td class="col-name"><div class="pname">Colero</div></td><td><span class="pbrand">ProChoice</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">48</span></td></tr>
-            <tr data-search="cubrecorona epona precio por par"><td class="col-name"><div class="pname">Cubrecorona</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">80</span></td></tr>
-            <tr data-search="cubrecorona prochoice precio por par"><td class="col-name"><div class="pname">Cubrecorona</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">ProChoice</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">75</span></td></tr>
-            <tr data-search="pichiqueras de neoprene prochoice precio por par"><td class="col-name"><div class="pname">Pichiqueras de neoprene</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">ProChoice</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">175</span></td></tr>
-            <tr data-search="pichiqueras de neoprene epona precio por par"><td class="col-name"><div class="pname">Pichiqueras de neoprene</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">130</span></td></tr>
-            <tr data-search="tendoneras epona precio por par"><td class="col-name"><div class="pname">Tendoneras</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">Epona</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">66</span></td></tr>
-            <tr data-search="tendoneras prochoice precio por par"><td class="col-name"><div class="pname">Tendoneras</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">ProChoice</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="tendoneras racing tack precio por par"><td class="col-name"><div class="pname">Tendoneras</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">Racing Tack</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">105</span></td></tr>
-            <tr data-search="tendoneras the husk precio por par"><td class="col-name"><div class="pname">Tendoneras</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">The Husk</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">160</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-  </div>
-  <div class="tab-panel" id="panel-bit">
-    <div class="section bit" id="sb01">
-      <div class="section-hd" onclick="toggleSec('sb01')">
-        <div class="section-left">
-          <span class="sec-name">Levantadores</span>
-          <span class="sec-count">22 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="levantador 3 piezas liso c rolo hierro dulce y bronce tato s"><td class="col-name"><div class="pname">Levantador 3 piezas liso c/rolo - Hierro dulce y bronce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador 3 piezas retorcido lento c rolo hierro dulce y bronce tato s"><td class="col-name"><div class="pname">Levantador 3 piezas retorcido lento c/rolo - Hierro dulce y bronce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador doble - bronce ingles "><td class="col-name"><div class="pname">Levantador doble - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="levantador doble alambre retorcido - hierro dulce tato's "><td class="col-name"><div class="pname">Levantador doble alambre retorcido - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador doble estilo roy - bronce ainsley "><td class="col-name"><div class="pname">Levantador doble Estilo Roy - Bronce</div></td><td><span class="pbrand">Ainsley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador doble mixto alambre retorcido hierro dulce tato s"><td class="col-name"><div class="pname">Levantador doble mixto alambre retorcido - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">215</span></td></tr>
-            <tr data-search="levantador doble mixto retorcido hierro dulce tato s"><td class="col-name"><div class="pname">Levantador doble mixto retorcido - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">215</span></td></tr>
-            <tr data-search="levantador doble retorcido acero ingles"><td class="col-name"><div class="pname">Levantador doble retorcido - Acero</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">185</span></td></tr>
-            <tr data-search="levantador doble retorcido - bronce ingles "><td class="col-name"><div class="pname">Levantador doble retorcido - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="levantador doble retorcido - hierro dulce tato's "><td class="col-name"><div class="pname">Levantador doble retorcido - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador doble sacacorcho - bronce abbey england "><td class="col-name"><div class="pname">Levantador doble sacacorcho - Bronce</div></td><td><span class="pbrand">Abbey England</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">285</span></td></tr>
-            <tr data-search="levantador doble sacacorcho - bronce ingles "><td class="col-name"><div class="pname">Levantador doble sacacorcho - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="levantador liso - bronce ingles "><td class="col-name"><div class="pname">Levantador liso - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="levantador liso - hierro dulce y cobre ingles "><td class="col-name"><div class="pname">Levantador liso - Hierro dulce y cobre</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="levantador liso estilo roy  - bronce y cobre ainsley "><td class="col-name"><div class="pname">Levantador liso Estilo Roy  - Bronce y cobre</div></td><td><span class="pbrand">Ainsley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador liso estilo roy - hierro dulce ainsley "><td class="col-name"><div class="pname">Levantador liso Estilo Roy - Hierro dulce</div></td><td><span class="pbrand">Ainsley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador liso estilo roy - acero y cobre tato's "><td class="col-name"><div class="pname">Levantador liso Estilo Roy - Acero y Cobre</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador retorcido - bronce ingles "><td class="col-name"><div class="pname">Levantador retorcido - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="levantador retorcido - hierro dulce tato's "><td class="col-name"><div class="pname">Levantador retorcido - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador retorcido estilo roy - bronce ainsley "><td class="col-name"><div class="pname">Levantador retorcido Estilo Roy - Bronce</div></td><td><span class="pbrand">Ainsley</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador retorcido lento - hierro dulce tato's "><td class="col-name"><div class="pname">Levantador retorcido lento - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">270</span></td></tr>
-            <tr data-search="levantador sacacorcho - bronce abbey england "><td class="col-name"><div class="pname">Levantador sacacorcho - Bronce</div></td><td><span class="pbrand">Abbey England</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">285</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section bit" id="sb02">
-      <div class="section-hd" onclick="toggleSec('sb02')">
-        <div class="section-left">
-          <span class="sec-name">Pelham</span>
-          <span class="sec-count">4 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="pelham egglink liso bronce ingles"><td class="col-name"><div class="pname">Pelham egglink liso - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">145</span></td></tr>
-            <tr data-search="pelham medio puente - bronce ingles "><td class="col-name"><div class="pname">Pelham medio puente - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">145</span></td></tr>
-            <tr data-search="pelham quebrado liso - bronce ingles "><td class="col-name"><div class="pname">Pelham quebrado liso - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">145</span></td></tr>
-            <tr data-search="pelham quebrado retorcido - bronce ingles "><td class="col-name"><div class="pname">Pelham quebrado retorcido - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">145</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section bit" id="sb03">
-      <div class="section-hd" onclick="toggleSec('sb03')">
-        <div class="section-left">
-          <span class="sec-name">Filetes</span>
-          <span class="sec-count">5 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="filete alambre retorcido - hierro dulce tato's "><td class="col-name"><div class="pname">Filete alambre retorcido - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">145</span></td></tr>
-            <tr data-search="filete liso - hierro dulce tato's "><td class="col-name"><div class="pname">Filete liso - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">145</span></td></tr>
-            <tr data-search="filete retorcido - hierro dulce tato's "><td class="col-name"><div class="pname">Filete retorcido - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">145</span></td></tr>
-            <tr data-search="filete retorcido lento - hierro dulce tato's "><td class="col-name"><div class="pname">Filete retorcido lento - Hierro dulce</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">145</span></td></tr>
-            <tr data-search="freno para freno filete - acero abbey england "><td class="col-name"><div class="pname">Freno para freno filete - Acero</div></td><td><span class="pbrand">Abbey England</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">225</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section bit" id="sb04">
-      <div class="section-hd" onclick="toggleSec('sb04')">
-        <div class="section-left">
-          <span class="sec-name">Pessoa</span>
-          <span class="sec-count">2 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="pessoa 4 argollas quebrado liso bronce ingles"><td class="col-name"><div class="pname">Pessoa 4 argollas quebrado liso - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-            <tr data-search="pessoa quebrado retorcido - bronce ingles "><td class="col-name"><div class="pname">Pessoa quebrado retorcido - Bronce</div></td><td><span class="pbrand">Inglés</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">135</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-    <div class="section bit" id="sb05">
-      <div class="section-hd" onclick="toggleSec('sb05')">
-        <div class="section-left">
-          <span class="sec-name">Accesorios</span>
-          <span class="sec-count">4 productos</span>
-        </div>
-        <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="section-body">
-        <table class="pt"><thead><tr><th style="width:52%">Producto</th><th>Marca</th><th class="r">Precio USD</th></tr></thead><tbody>
-            <tr data-search="barbada plana premium tato's "><td class="col-name"><div class="pname">Barbada plana premium</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">40</span></td></tr>
-            <tr data-search="discos de goma sin marca precio por par"><td class="col-name"><div class="pname">Discos de goma</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">—</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">5</span></td></tr>
-            <tr data-search="sogas economicas para levantador (par) gaita polo"><td class="col-name"><div class="pname">Sogas económicas para levantador (par)</div></td><td><span class="pbrand">Gaita Polo</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">25</span></td></tr>
-            <tr data-search="sogas premium para levantador (par) tato's precio por par"><td class="col-name"><div class="pname">Sogas premium para levantador (par)</div><div class="pdetail">Precio por par</div></td><td><span class="pbrand">Tato's</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">70</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-  </div>
+<div class="content" id="content"></div>
+<div class="footer"><p>Precios en USD · Los precios pueden actualizarse sin previo aviso<br>Envíos a todo el mundo · Consultar por colores, talles y personalizaciones disponibles</p></div>
+
+<a class="wa-float" href="https://wa.me/5491121835093" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<div class="idle" id="idle" role="status" aria-live="polite" hidden>
+  <button type="button" class="idle-x" id="idleX" aria-label="Cerrar">×</button>
+  <a class="idle-t" id="idleB" href="https://wa.me/5491121835093?text=Hola!%20Tengo%20una%20consulta" target="_blank" rel="noopener">¿Tenés alguna duda?</a>
 </div>
-<div class="footer"><p>Precios en <strong>USD</strong> · Los precios pueden actualizarse sin previo aviso<br>Envíos a todo el mundo · Consultar por colores, talles y personalizaciones disponibles</p></div>
+<div class="cart-bar" id="cartBar" aria-live="polite"><div class="cb-wrap">
+  <div class="cb-sum"><span id="cbCount">0 productos</span> · <b id="cbTotal">USD 0</b></div>
+  <button type="button" id="openPanel">Ver mi consulta</button>
+</div></div>
+<div class="veil" id="veil"></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+  <div class="p-head"><div><h2 id="pTitle">Mi consulta</h2><div class="steps"><span class="st on" id="st1">1. Productos</span><span class="st" id="st2">2. Tus datos</span></div></div><button type="button" class="x" id="closePanel" aria-label="Cerrar">×</button></div>
+  <div class="p-list" id="pList"></div>
+  <div class="p-foot">
+    <div class="p-total"><span>Total</span><span id="pTotal">USD 0</span></div>
+    <button type="button" class="empty" id="emptyCart">Vaciar consulta</button>
+    <div id="step1"><button type="button" class="next" id="goStep2">Continuar con mis datos</button></div>
+    <div id="step2">
+      <button type="button" class="back" id="goStep1">← Volver a los productos</button>
+      <div class="p-fields">
+      <label for="fName">Tu nombre *<input id="fName" type="text" autocomplete="name" required></label>
+      <label for="fZone">Ciudad *<input id="fZone" type="text" autocomplete="address-level2" placeholder="Ej: Pilar" required></label>
+    </div>
+    <fieldset class="pay" id="delBox"><legend>¿Cómo lo querés recibir? *</legend>
+      <p class="del-info"><b>Entregamos en Rodríguez y Pilar 2 veces por semana.</b> Si no estás decidido y preferís ver los productos, podemos acercarnos sin compromiso de compra.</p>
+      <label><input type="radio" name="entrega" value="Entrega en Rodríguez o Pilar"> Entrega en Rodríguez o Pilar</label>
+      <label><input type="radio" name="entrega" value="Quiero verlos antes"> Quiero verlos antes</label>
+      <label><input type="radio" name="entrega" value="Retiro por el taller en San Isidro"> Retiro por el taller en San Isidro</label>
+      <label><input type="radio" name="entrega" value="Envío por cadete o correo (cotización aparte)"> Envío por cadete o correo <small>(se cotiza aparte)</small></label>
+      <div class="addr" id="addrBox" hidden>
+        <label for="fAddr" class="addr-l">Dirección de entrega *<input id="fAddr" type="text" autocomplete="street-address" placeholder="Calle, número, localidad"></label>
+        <p class="addr-n">El costo del envío te lo informamos aparte por WhatsApp.</p>
+      </div>
+    </fieldset>
+    <fieldset class="pay" id="payBox"><legend>Forma de pago *</legend>
+      <label><input type="radio" name="pago" value="Transferencia en ARS"> Transferencia en ARS</label>
+      <label><input type="radio" name="pago" value="Transferencia en USD"> Transferencia en USD</label>
+      <label><input type="radio" name="pago" value="Efectivo"> Efectivo</label>
+    </fieldset>
+    <p class="send-err" id="sendErr" hidden></p>
+    <a class="send" id="send" href="https://wa.me/5491121835093" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar consulta por WhatsApp</a>
+    </div>
+  </div>
+</aside>
+<div class="sog" id="sog" role="dialog" aria-modal="true" aria-labelledby="sogTitle"><div class="sog-head"><div><h3 id="sogTitle">Opciones</h3><p id="sogName"></p></div><button type="button" class="x dark" id="closeSog" aria-label="Cerrar">×</button></div><div class="sog-opts" id="sogOpts"></div></div>
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Foto ampliada"><button type="button" class="x" id="closeZoom" aria-label="Cerrar">×</button><img id="zoomImg" alt=""><p id="zoomCap"></p></div>
+
 <script>
-var PRODUCTS=[];
-document.querySelectorAll('table.pt tbody tr[data-search]').forEach(function(tr){
-  var panel=tr.closest('.tab-panel');var tab=panel?panel.id.replace('panel-',''):'';
-  var section=tr.closest('.section');var secName=section?section.querySelector('.sec-name').textContent:'';
-  var catMap={player:'Jugador',horse:'Caballo',bit:'Embocaduras'};
-  PRODUCTS.push({search:tr.dataset.search,name:tr.querySelector('.pname').textContent,
-    detail:tr.querySelector('.pdetail')?tr.querySelector('.pdetail').textContent:'',
-    brand:tr.querySelector('.pbrand').textContent,
-    price:tr.querySelector('.price-val').textContent,cat:catMap[tab],section:secName});
+const WA='5491121835093';
+const API_URL='https://script.google.com/macros/s/AKfycbzJk5l-RVOJ_Yts-DkHndyEzDIR4r_m0q_pboNi9qgzN6vD3x3jqKV-etTEq_2jqwDhPw/exec';
+let DATA=[];
+const TABS=[['player','Jugador'],['horse','Caballo'],['bit','Embocaduras']];
+const CART_SVG='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 2h2l1.6 8h7.4l1.5-5.5H4.3"/><circle cx="6.2" cy="13.2" r="1"/><circle cx="12" cy="13.2" r="1"/></svg>';
+const SOG={none:{label:'sin sogas',add:0},eco:{label:'con sogas económicas',add:25},prem:{label:'con sogas premium',add:65,list:70}};
+const DISC_PRICE=5,BARB_ADD=35,BARB_LIST=40;
+const COLORS={'Negro':'#3c3b45','Blanco':'#eef1f6','Gris':'#7f8a9c','Rojo':'#b5393a','Naranja':'#e95318','Amarillo':'#d5b300','Amarillo flúo':'#cfcd00','Beige':'#9e7f3c','Verde':'#347e35','Verde claro':'#69d400','Celeste':'#2ca1f8','Azul':'#0054e3','Violeta':'#5a39bb','Fucsia':'#fe00ba','Rosa':'#f19de3'};
+const onlyLarga=d=>d.o==='pelham-larga';
+const TABKEY={'Jugador':'player','Caballo':'horse','Embocaduras':'bit'};
+let BY={};
+let view='list',tab='player',open={},levF='all',cart={};
+try{cart=JSON.parse(localStorage.getItem('gaita-consulta-web')||'{}')||{};}catch(e){cart={};}
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usd=n=>'USD '+Number(n).toLocaleString('es-AR');
+const full=d=>d.n+(d.b?' ('+d.b+')':'');
+const needsSogas=d=>d.o==='levantador-sogas';
+const isLev=d=>/^levantador/.test(d.o||'');
+const isPel=d=>/^pelham/.test(d.o||'');
+const hasOpts=d=>isLev(d)||isPel(d);
+const baseId=k=>k.split('|')[0];
+const opts=k=>{const o={};k.split('|').slice(1).forEach(p=>{const i=p.indexOf(':');o[p.slice(0,i)]=p.slice(i+1);});return o;};
+const mkKey=(id,o)=>[id].concat(Object.entries(o).filter(([,v])=>v).map(([a,v])=>a+':'+v)).join('|');
+const unitPrice=k=>{const o=opts(k);return Number(BY[baseId(k)].p)+(o.s?SOG[o.s].add:0)+(o.d?DISC_PRICE:0)+(o.b==='prem'?BARB_ADD:0);};
+const countFor=id=>Object.entries(cart).filter(([k])=>baseId(k)===id).reduce((a,[,v])=>a+v,0);
+function ctrl(d){
+  if(hasOpts(d)){const c=countFor(d.id);
+    return `${c?`<div class="incart">${c} en tu consulta</div>`:''}<button type="button" class="add" data-a="choose" data-id="${d.id}">${CART_SVG}Agregar</button>`;}
+  const q=cart[d.id]||0;
+  return q?`<div class="qty"><button type="button" data-a="dec" data-k="${d.id}" aria-label="Quitar uno">−</button><span>${q}</span><button type="button" data-a="inc" data-k="${d.id}" aria-label="Sumar uno">+</button></div>`
+          :`<button type="button" class="add" data-a="inc" data-k="${d.id}">${CART_SVG}Agregar</button>`;}
+function thumb(d){return d.f?`<button type="button" class="thumb" data-zoom="${d.id}" aria-label="Ampliar foto de ${esc(d.n)}"><img src="fotos/${encodeURI(d.f)}" alt="" loading="lazy"></button>`:`<div class="thumb none"><img src="fotos/logo-negro.png" alt=""></div>`;}
+function price(d){return `<div class="price-cell"><span class="price-cur">USD</span><span class="price-val">${esc(d.p)}</span></div>`;}
+function item(d){
+  const sel=countFor(d.id)>0;
+  const meta=`<div class="pname">${esc(d.n)}</div>${d.d?`<div class="pdetail">${esc(d.d)}${needsSogas(d)?' · se pueden sumar':''}</div>`:''}${d.b?`<span class="pbrand">${esc(d.b)}</span>`:''}`;
+  if(view==='grid')return `<article class="pcard${sel?' sel':''}" id="i-${d.id}">${thumb(d)}<div class="pbody"><div class="pmeta">${meta}</div><div class="pfoot">${price(d)}<div class="ctl">${ctrl(d)}</div></div></div></article>`;
+  return `<article class="prow${sel?' sel':''}" id="i-${d.id}">${thumb(d)}<div class="pmeta">${meta}</div>${price(d)}<div class="ctl">${ctrl(d)}</div></article>`;
+}
+const wrap=items=>`<div class="${view==='grid'?'pgrid':'plist'}">${items.map(item).join('')}</div>`;
+function levFilter(){return `<div class="subfilter" role="group" aria-label="Filtrar levantadores"><span>Ver:</span>${[['all','Todos'],['simple','Simples'],['doble','Dobles']].map(([k,l])=>`<button type="button" class="sf${levF===k?' on':''}" data-lf="${k}">${l}</button>`).join('')}</div>`;}
+function renderTabs(){
+  TABS.forEach(([k])=>{document.getElementById('tab-'+k).className='tab-btn'+(k===tab?' active-'+k:'');});
+  const secs=[];DATA.filter(d=>d.t===tab).forEach(d=>{if(!secs.includes(d.s))secs.push(d.s);});
+  document.getElementById('content').innerHTML=`<div class="tab-panel active">`+secs.map(s=>{
+    let items=DATA.filter(d=>d.t===tab&&d.s===s);const key=tab+'|'+s,isOpen=!!open[key],total=items.length;
+    let extra='';
+    if(s==='Levantadores'){extra=levFilter();if(levF!=='all')items=items.filter(d=>/doble/i.test(d.n)===(levF==='doble'));}
+    return `<div class="section ${tab}${isOpen?' open':''}"><button type="button" class="section-hd" data-sec="${esc(key)}" aria-expanded="${isOpen}"><div class="section-left"><span class="sec-name">${esc(s)}</span><span class="sec-count">${total} producto${total===1?'':'s'}</span></div><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="section-body">${isOpen?extra+wrap(items):''}</div></div>`;
+  }).join('')+`</div>`;
+}
+function renderSearch(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  const box=document.getElementById('searchResults'),tabsW=document.querySelector('.tabs-wrap'),content=document.getElementById('content'),rc=document.getElementById('resultCount');
+  if(!q){box.classList.remove('active');tabsW.style.display='';content.style.display='';rc.textContent='';return;}
+  const m=DATA.filter(d=>(d.n+' '+d.d+' '+d.b+' '+d.s).toLowerCase().includes(q));
+  box.classList.add('active');tabsW.style.display='none';content.style.display='none';
+  rc.textContent=m.length+(m.length===1?' resultado':' resultados');
+  document.getElementById('searchResultsBody').innerHTML=m.length?wrap(m):'<p style="padding:20px;text-align:center;color:#aaa;font-size:13px">Sin resultados</p>';
+}
+function render(){renderTabs();renderSearch();}
+function totals(){let q=0,t=0;Object.entries(cart).forEach(([k,v])=>{q+=v;t+=v*unitPrice(k);});return{q,t};}
+function extras(k){const o=opts(k),x=[];
+  if(o.s==='none')x.push('sin sogas');
+  if(o.s==='eco')x.push('+ sogas económicas (USD 25)');
+  if(o.s==='prem')x.push('+ sogas premium (USD 65 en lugar de USD 70)');
+  if(o.d)x.push('+ discos de goma '+o.d+' (USD 5)');
+  if(o.p)x.push('- pata '+o.p);
+  if(o.b==='prem')x.push('con barbada premium (+USD 35 en lugar de USD 40)');
+  return x;}
+function lineLabel(k){const d=BY[baseId(k)],x=extras(k);
+  return full(d)+(x.length?' '+x.join(' '):(d.d?' - '+d.d:''));}
+let ORDER=null;
+function orderId(){if(!ORDER){ORDER='GP-'+String(Math.floor(10000+Math.random()*90000));}return ORDER;}
+function payVal(){const r=document.querySelector('input[name="pago"]:checked');return r?r.value:'';}
+function isCad(){return /cadete/i.test(delVal());}
+function delVal(){const r=document.querySelector('input[name="entrega"]:checked');return r?r.value:'';}
+function message(){
+  const lines=Object.entries(cart).map(([k,v])=>`- ${v} x ${lineLabel(k)} - USD ${unitPrice(k)*v}`);
+  const {t}=totals(),nm=document.getElementById('fName').value.trim(),zn=document.getElementById('fZone').value.trim(),pg=payVal();
+  let m=`Consulta N° ${orderId()}\nHola! ${nm?'Soy '+nm+(zn?', de '+zn:'')+'. ':''}Me interesan estos productos de la lista:\n${lines.join('\n')}\nTotal: USD ${t}`;
+  const en=delVal(),ad=document.getElementById('fAddr').value.trim();if(en)m+=`\nEntrega: ${en}`+(isCad()&&ad?` - Dirección: ${ad}`:'');
+  if(pg)m+=`\nForma de pago: ${pg}`;
+  return m;
+}
+function missing(){const f=[];if(!document.getElementById('fName').value.trim())f.push('fName');if(!document.getElementById('fZone').value.trim())f.push('fZone');if(!delVal())f.push('entrega');if(isCad()&&!document.getElementById('fAddr').value.trim())f.push('fAddr');if(!payVal())f.push('pago');return f;}
+function refreshCart(){
+  const {q,t}=totals();
+  document.body.classList.toggle('has-cart',q>0);
+  document.getElementById('cartBar').classList.toggle('show',q>0);
+  document.getElementById('cbCount').textContent=q+(q===1?' producto':' productos');
+  document.getElementById('cbTotal').textContent=usd(t);
+  document.getElementById('pTotal').textContent=usd(t);
+  document.getElementById('pList').innerHTML=q?Object.entries(cart).map(([k,v])=>{const d=BY[baseId(k)],o=opts(k),xs=[];
+    if(o.s==='prem')xs.push('Sogas premium USD 65 <s>USD 70</s>');if(o.s==='eco')xs.push('Sogas económicas USD 25');if(o.s==='none')xs.push('Sin sogas');
+    if(o.p)xs.push('Pata '+esc(o.p));if(o.d)xs.push('Discos '+esc(o.d)+' USD 5');if(o.b==='prem')xs.push('Barbada premium +USD 35 <s>USD 40</s>');
+    const vv=xs.length;const sub=vv?xs.join(' · '):esc([d.d,d.b].filter(Boolean).join(' · '));
+    return `<div class="p-item">${d.f?`<img class="ph" src="fotos/${encodeURI(d.f)}" alt="">`:'<img class="ph none" src="fotos/logo-negro.png" alt="">'}<div class="t">${esc(d.n)}<small>${sub}${vv&&d.b?' · '+esc(d.b):''}</small><div class="qty sm"><button type="button" data-a="dec" data-k="${k}" aria-label="Quitar uno">−</button><span>${v}</span><button type="button" data-a="inc" data-k="${k}" aria-label="Sumar uno">+</button></div></div><div class="r">${usd(unitPrice(k)*v)}<button type="button" data-a="del" data-k="${k}">Quitar</button></div></div>`;}).join('')
+    :'<p class="p-note">Todavía no agregaste productos.</p>';
+  document.getElementById('send').href=`https://wa.me/${WA}?text=${encodeURIComponent(message())}`;
+  try{localStorage.setItem('gaita-consulta-web',JSON.stringify(cart));}catch(e){}
+}
+function updItem(id){document.querySelectorAll('#i-'+id).forEach(el=>{el.classList.toggle('sel',countFor(id)>0);el.querySelector('.ctl').innerHTML=ctrl(BY[id]);});refreshCart();}
+const panel=document.getElementById('panel'),veil=document.getElementById('veil'),zoom=document.getElementById('zoom'),sog=document.getElementById('sog');
+function openP(){refreshCart();panel.classList.add('show');veil.classList.add('show');document.getElementById('closePanel').focus();}
+function closeP(){panel.classList.remove('show');if(!sog.classList.contains('show'))veil.classList.remove('show');}
+function openZ(id){const d=BY[id];const im=document.getElementById('zoomImg');im.src='fotos/'+encodeURI(d.f);im.alt=d.n;document.getElementById('zoomCap').textContent=full(d)+' · USD '+d.p;zoom.classList.add('show');document.getElementById('closeZoom').focus();}
+function closeZ(){zoom.classList.remove('show');}
+let cur=null;
+function openS(id){const d=BY[id];cur={id,s:needsSogas(d)?'none':'',d:'',dc:'',b:isPel(d)?'std':'',p:isPel(d)&&onlyLarga(d)?'larga':''};
+  document.getElementById('sogTitle').textContent=isPel(d)?'Elegí la barbada':'Armá tu levantador';
+  document.getElementById('sogName').textContent=full(d)+' · '+usd(d.p);
+  let h='';
+  if(needsSogas(d)){h+=`<div class="og"><div class="ot">Sogas</div>
+   <button type="button" class="opt" data-o="s" data-val="none"><span class="ol">Sin sogas</span><span class="op">+ USD 0</span></button>
+   <button type="button" class="opt" data-o="s" data-val="eco"><span class="ol">Sogas económicas</span><span class="op">+ USD 25</span></button>
+   <button type="button" class="opt best" data-o="s" data-val="prem"><span class="ol"><span class="badge">Ahorrás USD 5</span>Sogas premium<em>Llevándolas con el levantador: USD 65 en lugar de USD 70</em></span><span class="op">+ USD 65 <s>70</s></span></button></div>`;}
+  if(isLev(d)){h+=`<div class="og"><div class="ot">Discos de goma <small>(par)</small></div>
+   <label class="chk"><input type="checkbox" id="discOn"> Sumar discos de goma <b>+ USD 5</b></label>
+   <div class="sw" id="discSw" aria-label="Color de los discos">${Object.entries(COLORS).map(([n,c])=>`<button type="button" class="swb" data-o="dc" data-val="${n}" title="${n}"><span style="background:${c}"></span>${n}</button>`).join('')}</div></div>`;}
+  if(isPel(d)){h+=onlyLarga(d)?`<div class="og"><div class="ot">Pata</div><p class="onote">Este modelo viene solo en pata larga.</p></div>`:`<div class="og"><div class="ot">Pata</div><div class="two">
+   <button type="button" class="opt" data-o="p" data-val="larga"><span class="ol">Pata larga</span></button>
+   <button type="button" class="opt" data-o="p" data-val="corta"><span class="ol">Pata corta</span></button></div></div>`;}
+  if(isPel(d)){h+=`<div class="og"><div class="ot">Barbada</div>
+   <button type="button" class="opt" data-o="b" data-val="std"><span class="ol">Barbada incluida</span><span class="op">+ USD 0</span></button>
+   <button type="button" class="opt best" data-o="b" data-val="prem"><span class="ol"><span class="badge">Ahorrás USD 5</span>Cambiar por barbada premium<em>Sola cuesta USD 40; con el pelham, USD 35</em></span><span class="op">+ USD 35 <s>40</s></span></button></div>`;}
+  h+=`<div class="ofoot"><div><span>Total</span><b id="optTotal"></b></div><button type="button" class="send" id="optAdd">${CART_SVG}Agregar a la consulta</button></div>`;
+  document.getElementById('sogOpts').innerHTML=h;
+  const on=document.getElementById('discOn');
+  if(on){on.addEventListener('change',()=>{if(!on.checked)cur.dc='';syncOpt();});}
+  syncOpt();sog.classList.add('show');veil.classList.add('show');document.getElementById('closeSog').focus();}
+function syncOpt(){if(!cur)return;const d=BY[cur.id];
+  if(cur.dc&&document.getElementById('discOn'))document.getElementById('discOn').checked=true;
+  document.querySelectorAll('#sogOpts [data-o]').forEach(b=>b.classList.toggle('picked',cur[b.dataset.o]===b.dataset.val));
+  const on=document.getElementById('discOn'),sw=document.getElementById('discSw');
+  if(sw)sw.classList.toggle('off',!(on&&on.checked));
+  cur.d=on&&on.checked?(cur.dc||'?'):'';
+  const t=Number(d.p)+(cur.s?SOG[cur.s].add:0)+(cur.d?DISC_PRICE:0)+(cur.b==='prem'?BARB_ADD:0);
+  document.getElementById('optTotal').textContent=usd(t);
+  const btn=document.getElementById('optAdd');const needP=isPel(d)&&!cur.p,bad=cur.d==='?'||needP;btn.disabled=bad;
+  btn.lastChild.textContent=needP?'Elegí pata larga o corta':cur.d==='?'?'Elegí el color de los discos':'Agregar a la consulta';}
+function confirmOpt(){if(!cur||cur.d==='?'||(isPel(BY[cur.id])&&!cur.p))return;const o={s:cur.s,p:cur.p,d:cur.d,b:cur.b==='prem'?'prem':''};const k=mkKey(cur.id,o);cart[k]=(cart[k]||0)+1;const id=cur.id;closeS();updItem(id);}
+function closeS(){sog.classList.remove('show');if(!panel.classList.contains('show'))veil.classList.remove('show');}
+document.addEventListener('click',e=>{
+  const oo=e.target.closest('[data-o]');if(oo){cur[oo.dataset.o]=oo.dataset.val;syncOpt();return;}
+  if(e.target.closest('#optAdd')){confirmOpt();return;}
+  const z=e.target.closest('[data-zoom]');if(z){openZ(z.dataset.zoom);return;}
+  const lf=e.target.closest('[data-lf]');if(lf){levF=lf.dataset.lf;renderTabs();return;}
+  const sec=e.target.closest('[data-sec]');if(sec){const k=sec.dataset.sec;open[k]=!open[k];renderTabs();return;}
+  const tb=e.target.closest('[data-tab]');if(tb){tab=tb.dataset.tab;renderTabs();return;}
+  const vb=e.target.closest('[data-v]:not([data-a])');if(vb){view=vb.dataset.v;document.querySelectorAll('.view-toggle [data-v]').forEach(x=>x.classList.toggle('on',x===vb));render();return;}
+  const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a;
+  if(a==='choose'){openS(b.dataset.id);return;}
+  
+  const k=b.dataset.k;
+  if(a==='inc')cart[k]=(cart[k]||0)+1;
+  if(a==='dec'){cart[k]=(cart[k]||0)-1;if(cart[k]<=0)delete cart[k];}
+  if(a==='del')delete cart[k];
+  updItem(baseId(k));if(!Object.keys(cart).length)closeP();
 });
-function handleSearch(){
-  var q=document.getElementById('searchInput').value.toLowerCase().trim();
-  var rd=document.getElementById('searchResults'),tb=document.getElementById('searchResultsBody'),ce=document.getElementById('resultCount');
-  if(!q){rd.classList.remove('active');document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
-    document.getElementById('panel-player').classList.add('active');
-    document.getElementById('tab-player').className='tab-btn active-player';
-    document.getElementById('tab-horse').className='tab-btn';
-    document.getElementById('tab-bit').className='tab-btn';ce.textContent='';return;}
-  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});rd.classList.add('active');
-  var m=PRODUCTS.filter(function(p){return p.search.indexOf(q)>-1||p.name.toLowerCase().indexOf(q)>-1||p.brand.toLowerCase().indexOf(q)>-1;});
-  if(m.length===0){tb.innerHTML='<tr><td colspan="4" style="padding:20px;text-align:center;color:#aaa;font-size:13px">Sin resultados</td></tr>';}
-  else{tb.innerHTML=m.map(function(p){var d=p.detail?'<div class="pdetail">'+p.detail+'</div>':'';
-    return '<tr><td><div class="pname">'+p.name+'</div>'+d+'</td><td style="font-size:12px;color:#888">'+p.cat+' › '+p.section+'</td><td><span class="pbrand">'+p.brand+'</span></td><td class="price-cell"><span class="price-cur">USD</span><span class="price-val">'+p.price+'</span></td></tr>';}).join('');}
-  ce.textContent=m.length+(m.length===1?' resultado':' resultados');
+zoom.addEventListener('click',closeZ);
+document.getElementById('openPanel').addEventListener('click',openP);
+document.getElementById('closePanel').addEventListener('click',closeP);
+document.getElementById('closeSog').addEventListener('click',closeS);
+veil.addEventListener('click',()=>{closeS();closeP();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeS();closeP();closeZ();}});
+['fName','fZone'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{document.getElementById(id).closest('label').classList.remove('err');refreshCart();}));
+document.querySelectorAll('input[name="pago"]').forEach(r=>r.addEventListener('change',()=>{document.getElementById('payBox').classList.remove('err');refreshCart();}));
+document.querySelectorAll('input[name="entrega"]').forEach(r=>r.addEventListener('change',()=>{document.getElementById('delBox').classList.remove('err');document.getElementById('addrBox').hidden=!isCad();refreshCart();}));
+document.getElementById('fAddr').addEventListener('input',()=>{document.getElementById('fAddr').closest('label').classList.remove('err');refreshCart();});
+document.getElementById('send').addEventListener('click',e=>{const f=missing();const msg=document.getElementById('sendErr');
+  if(f.length){e.preventDefault();f.forEach(id=>{(id==='pago'?document.getElementById('payBox'):id==='entrega'?document.getElementById('delBox'):document.getElementById(id).closest('label')).classList.add('err');});msg.textContent=f.includes('fAddr')&&f.length===1?'Completá la dirección de entrega para que podamos cotizar el envío.':'Completá tu nombre, tu ciudad, cómo querés recibirlo'+(isCad()?' (con la dirección)':'')+' y la forma de pago para enviar la consulta.';msg.hidden=false;}
+  else{msg.hidden=true;logConsulta();setTimeout(()=>{ORDER=null;refreshCart();},500);}});
+function logConsulta(){try{const {t}=totals();const body=JSON.stringify({numero:orderId(),nombre:document.getElementById('fName').value.trim(),ciudad:document.getElementById('fZone').value.trim(),entrega:delVal(),direccion:isCad()?document.getElementById('fAddr').value.trim():'',pago:payVal(),productos:Object.entries(cart).map(([k,v])=>v+' x '+lineLabel(k)+' - USD '+unitPrice(k)*v).join('\n'),total:t});
+  if(navigator.sendBeacon)navigator.sendBeacon(API_URL,new Blob([body],{type:'text/plain'}));else fetch(API_URL,{method:'POST',body,mode:'no-cors',keepalive:true});}catch(e){}}
+document.getElementById('searchInput').addEventListener('input',renderSearch);
+
+function setStep(n){panel.classList.toggle('s2',n===2);document.getElementById('st1').classList.toggle('on',n===1);document.getElementById('st2').classList.toggle('on',n===2);
+  const f=document.querySelector('.p-foot');if(f)f.scrollTop=0;}
+document.getElementById('emptyCart').addEventListener('click',()=>{cart={};render();refreshCart();closeP();});
+document.getElementById('goStep2').addEventListener('click',()=>setStep(2));
+document.getElementById('goStep1').addEventListener('click',()=>setStep(1));
+document.getElementById('openPanel').addEventListener('click',()=>setStep(1));
+
+(function(){let shown=false,t;const box=document.getElementById('idle');try{shown=sessionStorage.getItem('gaita-idle')==='1';}catch(e){}
+  
+  const busy=()=>panel.classList.contains('show')||sog.classList.contains('show')||zoom.classList.contains('show');
+  const show=()=>{if(shown||busy()){arm();return;}box.hidden=false;shown=true;try{sessionStorage.setItem('gaita-idle','1');}catch(e){}document.querySelector('.wa-float').classList.add('ping');};
+  const arm=()=>{clearTimeout(t);if(!shown)t=setTimeout(show,10000);};
+  ['mousemove','mousedown','keydown','touchstart'].forEach(ev=>window.addEventListener(ev,arm,{passive:true}));
+  const close=()=>{box.hidden=true;document.querySelector('.wa-float').classList.remove('ping');};
+  document.getElementById('idleX').addEventListener('click',close);
+  document.getElementById('idleB').addEventListener('click',close);
+  arm();})();
+
+function loadData(){
+  const c=document.getElementById('content');c.innerHTML='<p class="loading">Cargando productos...</p>';
+  fetch(API_URL).then(r=>r.json()).then(j=>{
+    DATA=(j.productos||[]).map(d=>Object.assign({},d,{t:TABKEY[d.t]||d.t,p:String(d.p),id:'p'+(d.n+'|'+d.b).replace(/[^A-Za-z0-9]/g,'').slice(0,40)+'_'+Math.abs([...(d.n+d.b+d.s)].reduce((a,ch)=>(a*31+ch.charCodeAt(0))|0,7))}));
+    BY={};DATA.forEach(d=>BY[d.id]=d);
+    Object.keys(cart).forEach(k=>{if(!BY[k.split('|')[0]])delete cart[k];});
+    render();refreshCart();
+  }).catch(()=>{c.innerHTML='<p class="loading">No pudimos cargar la lista en este momento. Escribinos por WhatsApp al +54 9 11 2183 5093 y te pasamos los precios.</p>';});
 }
-function switchTab(t){
-  document.getElementById('searchInput').value='';document.getElementById('searchResults').classList.remove('active');document.getElementById('resultCount').textContent='';
-  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
-  document.getElementById('panel-'+t).classList.add('active');
-  ['player','horse','bit'].forEach(function(x){document.getElementById('tab-'+x).className='tab-btn'+(x===t?' active-'+x:'');});
-}
-function toggleSec(id){document.getElementById(id).classList.toggle('open');}
+loadData();
 </script>
 </body>
 </html>
